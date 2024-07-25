@@ -1,18 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test'
+import { TextBox } from '../pageObjects/textBox.page'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Testing functionality of "Text Box" page', () => {
+  let textBoxPage: TextBox
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test.beforeEach(async ({ page }) => {
+    textBoxPage = new TextBox(page)
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+    // instead must be methods that lead u to page from base to "Text Box"
+    await page.goto('/text-box')
+  })
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+  test('happy path', async () => {
+    // that's how u use you're methods
+    await textBoxPage.fillNameAndClickSubmitButton()
+  })
+})
