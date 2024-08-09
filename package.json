@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "ts-standard"
+    "lint": "ts-standard",
+    "lint-fix": "npx ts-standard --fix"
   },
   "keywords": [],
   "author": "",
