@@ -4,6 +4,6 @@ export async function findKeyByValue<T> (obj: { [key: string]: T[] }, value: T):
       return key
     }
   }
-  console.error(`${value} doesn't exist in ${obj}`)
+  console.error(`${String(value)} doesn't exist in ${JSON.stringify(obj)}`)
   return undefined
 }

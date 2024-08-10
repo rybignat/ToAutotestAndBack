@@ -7,11 +7,13 @@ test.describe('Testing functionality of "Text Box" page', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let textBoxPage: TextBox
+
   const defaultUser = {
     name: 'Ilya de Gay le Pidorr',
     email: 'ilyao4koshnik@anal.com',
     currentAddress: 'Nexdoor str.',
-    permanentAddress: 'Kanava deadend'
+    permanentAddress: 'Kanava deadend',
+    invalidEmail: 'test'
   }
 
   test.beforeEach(async ({ page }) => {
@@ -19,15 +21,13 @@ test.describe('Testing functionality of "Text Box" page', () => {
     textBoxPage = new TextBox(page)
     navigationBar = new NavigationBar(page)
 
-    // mpm run lint не прощает
-
     await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Text Box')
   })
 
   test('email validation', async () => {
-    await textBoxPage.enterEmail('test')
+    await textBoxPage.enterEmail(defaultUser.invalidEmail)
     await textBoxPage.clickSubmitButton()
     await textBoxPage.expectErrorToBeVisible(true)
   })
