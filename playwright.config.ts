@@ -8,7 +8,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI, // Запрет использования test.only в CI
   retries: process.env.CI ? 2 : 0, // Повторные попытки в CI
   workers: process.env.CI ? 1 : undefined, // Количество воркеров в CI
-  reporter: 'line', // Используемый репортер
+  reporter: [['list'], ['./Utills/customReporter.ts']], // Используемый репортер
 
   use: {
     baseURL: 'https://demoqa.com/',

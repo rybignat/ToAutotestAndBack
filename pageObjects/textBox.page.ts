@@ -25,10 +25,6 @@ export class TextBox {
     this.permanentAddressOutput = page.locator('//p[@id="permanentAddress"]')
   }
 
-  async callDebug (): Promise<void> {
-    await this.page.pause()
-  }
-
   async enterName (name: string): Promise<void> { await this.fullNameInput.fill(name) }
 
   async enterEmail (email: string): Promise<void> { await this.emailInput.fill(email) }
