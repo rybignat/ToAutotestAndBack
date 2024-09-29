@@ -26,7 +26,7 @@ test.describe('Testing functionality of "Text Box" page', () => {
     await navigationBar.clickOnElementByParentAndName('Text Box')
   })
 
-  test('email validation', async () => { 
+  test('email validation', async () => {
     await test.step('Вводим в поле почту', async () => {
       await textBoxPage.enterEmail(defaultUser.invalidEmail)
     })

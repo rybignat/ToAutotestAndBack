@@ -7,7 +7,8 @@ export default defineConfig({
   fullyParallel: true, // Запуск тестов в параллельном режиме
   forbidOnly: !!process.env.CI, // Запрет использования test.only в CI
   retries: process.env.CI ? 2 : 0, // Повторные попытки в CI
-  workers: process.env.CI ? 1 : undefined, // Количество воркеров в CI
+  workers: process.env.CI ? 1 : 1, // Количество воркеров в CI
+  reportSlowTests: null,
   reporter: [['list'], ['./Utills/customReporter.ts']], // Используемый репортер
 
   use: {

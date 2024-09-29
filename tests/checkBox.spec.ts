@@ -27,7 +27,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     await removeSideAds(page)
   })
 
-  test('CASE_1: One checkbox in each folder', async ({ page }) => {
+  test('CASE_1: One checkbox in each folder', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()
@@ -48,7 +48,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
       }
     })
   })
-  test('CASE_2: A large folder consisting of two small ones by one click', async ({ page }) => {
+  test('CASE_2: A large folder consisting of two small ones by one click', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()
@@ -69,7 +69,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
       }
     })
   })
-  test('CASE_3: One folder by selecting all elements inside', async ({ page }) => {
+  test('CASE_3: One folder by selecting all elements inside', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()
@@ -90,7 +90,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
       }
     })
   })
-  test('CASE_4: A large folder consisting of two small ones by selecting all elements inside', async ({ page }) => {
+  test('CASE_4: A large folder consisting of two small ones by selecting all elements inside', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()
@@ -111,7 +111,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
       }
     })
   })
-  test('CASE_5: Select all files,by clicking on Home folder', async ({ page }) => {
+  test('CASE_5: Select all files,by clicking on Home folder', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()
@@ -132,7 +132,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
       }
     })
   })
-  test('CASE_6: Select all files,by clicking on each of them', async ({ page }) => {
+  test('CASE_6: Select all files,by clicking on each of them', async () => {
     let formatedArray: string[] = []
     await test.step('Нажимаем кнопку "Раскрыть все"', async () => {
       await checkBoxPage.clickExpandAllButton()

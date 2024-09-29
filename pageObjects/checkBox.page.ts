@@ -3,19 +3,19 @@ import { scrollToElement } from '../Utills/functions'
 
 export default class CheckBoxPage {
   page: Page
-  expandButton: Locator
+  expandAllButton: Locator
   collapseButton: Locator
   outputArea: Locator
 
   constructor (page: Page) {
     this.page = page
-    this.expandButton = page.locator('//button[@title="Expand all"]')
+    this.expandAllButton = page.locator('//button[@title="Expand all"]')
     this.collapseButton = page.locator('//button[@title="Collapse all"]')
     this.outputArea = page.locator('')
   }
 
   async clickExpandAllButton (): Promise<void> {
-    await this.expandButton.click({ force: true })
+    await this.expandAllButton.click({ force: true })
   }
 
   async clickCheckBoxByName (elementName: string): Promise<void> {
@@ -51,7 +51,8 @@ export default class CheckBoxPage {
   }
 
   async getSpanQuantity (): Promise<number> {
-    return ((await this.page.$$('//div[@id="result"]/span')).length) - 1
+    const spanElements = await this.page.locator('//div[@id="result"]/span').count()
+    return spanElements - 1
   }
 
   async getParentsByRules (elementsArray: string[]): Promise<string[]> {

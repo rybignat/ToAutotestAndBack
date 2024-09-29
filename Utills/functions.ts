@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test'
+import { type Page } from '@playwright/test'
 export async function findKeyByValue<T> (obj: { [key: string]: T[] }, value: T): Promise<string | undefined> {
   for (const key in obj) {
     if (obj[key].includes(value)) {
