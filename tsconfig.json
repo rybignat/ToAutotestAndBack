@@ -9,6 +9,7 @@
   },
   "include": [
     "tests/**/*.ts",
+    "Utills/**/*.ts",
     "pageObjects/**/*.ts",
   ],
   "exclude": [

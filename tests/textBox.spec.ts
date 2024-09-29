@@ -27,20 +27,44 @@ test.describe('Testing functionality of "Text Box" page', () => {
   })
 
   test('email validation', async () => {
-    await textBoxPage.enterEmail(defaultUser.invalidEmail)
-    await textBoxPage.clickSubmitButton()
-    await textBoxPage.expectErrorToBeVisible(true)
+    await test.step('Вводим в поле почту', async () => {
+      await textBoxPage.enterEmail(defaultUser.invalidEmail)
+    })
+    await test.step('Нажимаем кнопку "Подтвердить"', async () => {
+      await textBoxPage.clickSubmitButton()
+    })
+    await test.step('Проверяем,что почта не соответствует требуемому формату', async () => {
+      await textBoxPage.expectErrorToBeVisible(true)
+    })
   })
 
   test('happy path', async () => {
-    await textBoxPage.enterName(defaultUser.name)
-    await textBoxPage.enterEmail(defaultUser.email)
-    await textBoxPage.enterCurrentAddress(defaultUser.currentAddress)
-    await textBoxPage.enterPermanentAddress(defaultUser.permanentAddress)
-    await textBoxPage.clickSubmitButton()
-    await textBoxPage.checkCurrentName(defaultUser.name)
-    await textBoxPage.checkEmail(defaultUser.email)
-    await textBoxPage.checkCurrentAddress(defaultUser.currentAddress)
-    await textBoxPage.checkPermanentAddress(defaultUser.permanentAddress)
+    await test.step('Вводим имя пользователя', async () => {
+      await textBoxPage.enterName(defaultUser.name)
+    })
+    await test.step('Вводим email пользователя', async () => {
+      await textBoxPage.enterEmail(defaultUser.email)
+    })
+    await test.step('Вводим текущий адрес пользователя', async () => {
+      await textBoxPage.enterCurrentAddress(defaultUser.currentAddress)
+    })
+    await test.step('Вводим адрес прописки пользователя', async () => {
+      await textBoxPage.enterPermanentAddress(defaultUser.permanentAddress)
+    })
+    await test.step('Нажимаем кнопку "Подтвердить"', async () => {
+      await textBoxPage.clickSubmitButton()
+    })
+    await test.step('Проверяем,верно ли имя в форме', async () => {
+      await textBoxPage.checkCurrentName(defaultUser.name)
+    })
+    await test.step('Проверяем,верен ли email в форме', async () => {
+      await textBoxPage.checkEmail(defaultUser.email)
+    })
+    await test.step('Проверяем,верный ли текущий адрес в форме', async () => {
+      await textBoxPage.checkCurrentAddress(defaultUser.currentAddress)
+    })
+    await test.step('Проверяем,верный ли адрес прописки в форме', async () => {
+      await textBoxPage.checkPermanentAddress(defaultUser.permanentAddress)
+    })
   })
 })

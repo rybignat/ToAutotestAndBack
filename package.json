@@ -4,14 +4,15 @@
   "main": "index.js",
   "scripts": {
     "lint": "ts-standard",
-    "lint-fix": "npx ts-standard --fix"
+    "lint-fix": "npx ts-standard --fix",
+    "tests": "npx playwright test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.45.1",
+    "@playwright/test": "^1.47.2",
     "@types/node": "^20.14.10",
     "standard": "^17.1.0",
     "ts-node": "^10.9.2",
