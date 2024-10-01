@@ -18,7 +18,7 @@ To install and run my project, make sure you have Node.js and Git installed! The
 1. **Clone the repository:**
 
 ```bash
-git clone [https://github.com/rybignat/TestPopierdolilo.git]
+git clone [https://github.com/rybignat/ToAutotestAndBack.git]
 ```
 
 2. Installing dependencies:
@@ -58,11 +58,17 @@ Project structure:
 node_modules/
 
 pageObjects/
+├──checkBox.page.ts
+├──textBox.page.ts
+├──radioButton.page.ts
+├──main.page.ts
+└──commonObjects.page.ts
 
 test-results/
 
 tests/
-├──checkBox.scec.ts
+├──checkBox.spec.ts
+├──radioButton.spec.ts
 └──textBox.spec.ts
 
 Utills/
