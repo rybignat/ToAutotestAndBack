@@ -2,31 +2,26 @@ import { type Locator, type Page, expect } from '@playwright/test'
 
 export default class RadioButtonPage {
   page: Page
-  yesButton: Locator
-  impressiveButton: Locator
   noButton: Locator
+  radioButtons: { [key: string]: string } = {
+    Yes: '//input[@id="yesRadio"]',
+    Impressive: '//input[@id="impressiveRadio"]'
+  }
 
   constructor (page: Page) {
     this.page = page
-    this.yesButton = page.locator('//input[@type="radio" and contains (@id, "yesRadio")]')
-    this.impressiveButton = page.locator('//input[@id="impressiveRadio"]')
     this.noButton = page.locator('//label[@class="custom-control-label disabled"]')
+  }
+
+  async clickRadioButtonByName (key: string): Promise<void> {
+    const locator: Locator = this.page.locator(this.radioButtons[key])
+    await expect(locator).toBeVisible()
+    await locator.click({ force: true })
+    await expect(locator).toBeChecked()
   }
 
   async isButtonDisabled (): Promise<void> {
     await expect(this.noButton).toBeDisabled()
-  }
-
-  async clickYesButton (): Promise<void> {
-    await expect(this.yesButton).toBeVisible()
-    await this.yesButton.click({ force: true })
-    await expect(this.yesButton).toBeChecked()
-  }
-
-  async clickImpressiveButton (): Promise<void> {
-    await expect(this.impressiveButton).toBeVisible()
-    await this.impressiveButton.click({ force: true })
-    await expect(this.impressiveButton).toBeChecked()
   }
 
   async checkisElementVisibleInResult (element: string): Promise<boolean> {

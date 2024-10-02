@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import RadioButtonPage from '../pageObjects/radioButton.page'
-import { MainPage } from '../pageObjects/main.page'
-import { NavigationBar } from '../Utills/Components/navigationBar.page'
+import MainPage from '../pageObjects/main.page'
+import NavigationBar from '../Utills/Components/navigationBar.page'
 import { removeMainAds, removeSideAds } from '../Utills/functions'
 
 test.describe('Check the functioning of the "Radio Button" section', () => {
@@ -23,7 +23,7 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
 
   test('CASE_1: Select "Yes" button and check result', async () => {
     await test.step('Click "Yes" button', async () => {
-      await radioButtonPage.clickYesButton()
+      await radioButtonPage.clickRadioButtonByName('Yes')
     })
     await test.step('Check the result (expecting "Yes")', async () => {
       await radioButtonPage.checkisElementVisibleInResult('Yes')
@@ -32,7 +32,7 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
 
   test('CASE_2: Click "Impressive" button and check result', async () => {
     await test.step('Click "Impressive" button', async () => {
-      await radioButtonPage.clickImpressiveButton()
+      await radioButtonPage.clickRadioButtonByName('Impressive')
     })
     await test.step('Check the result (expecting "Impressive")', async () => {
       await radioButtonPage.checkisElementVisibleInResult('Impressive')
@@ -47,16 +47,19 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
 
   test('CASE_4: Click on "Yes" button, check result then click "Impressive" button and check result', async () => {
     await test.step('Click "Yes" button', async () => {
-      await radioButtonPage.clickYesButton()
+      await radioButtonPage.clickRadioButtonByName('Yes')
     })
     await test.step('Check result(expecting "Yes"', async () => {
       await radioButtonPage.checkisElementVisibleInResult('Yes')
     })
     await test.step('Click "Impressive" button', async () => {
-      await radioButtonPage.clickImpressiveButton()
+      await radioButtonPage.clickRadioButtonByName('Impressive')
     })
     await test.step('Check result (expecting "Impressive")', async () => {
       await radioButtonPage.checkisElementVisibleInResult('Impressive')
+    })
+    await test.step('CHeck that "No" button is disabled', async () => {
+      await radioButtonPage.isButtonDisabled()
     })
   })
 })

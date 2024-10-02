@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 
-export class MainPage {
+export default class MainPage {
   page: Page
 
   constructor (page: Page) {

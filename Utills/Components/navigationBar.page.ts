@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test'
 import { findKeyByValue } from '../functions'
 import { NavigationBarStructure } from '../types'
-export class NavigationBar {
+export default class NavigationBar {
   page: Page
   navigationBarStructure: NavigationBarStructure = {
     Elements: ['Text Box', 'Check Box', 'Radio Button', 'Web Tables', 'Buttons', 'Links', 'Broken Links - Images', 'Upload and Download', 'Dynamic Properties'],
