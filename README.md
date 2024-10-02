@@ -18,7 +18,7 @@ To install and run my project, make sure you have Node.js and Git installed! The
 1. **Clone the repository:**
 
 ```bash
-git clone [https://github.com/rybignat/TestPopierdolilo.git]
+git clone [https://github.com/rybignat/ToAutotestAndBack.git]
 ```
 
 2. Installing dependencies:
@@ -58,11 +58,17 @@ Project structure:
 node_modules/
 
 pageObjects/
+├──checkBox.page.ts
+├──textBox.page.ts
+├──radioButton.page.ts
+├──main.page.ts
+└──commonObjects.page.ts
 
 test-results/
 
 tests/
-├──checkBox.scec.ts
+├──checkBox.spec.ts
+├──radioButton.spec.ts
 └──textBox.spec.ts
 
 Utills/
@@ -85,8 +91,6 @@ README.md
 Main files and folders:
 
 - **Utills/Components**: Contains application components.
-- **pageObjects/**: Contains the described application pages.
 - **pageObjects/main.page.js**: An example of a page organized according to the Page Object Model.
 - **Utills/**: Utility functions, such as `functions.js` or `customReporter.js`.
-- **tests/**: Contains *spec* files - that is, test scripts / suites.
 - **.github/workflows/playwright.yml**: CI configuration to run tests automatically.

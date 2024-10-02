@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import CheckBoxPage from '../pageObjects/checkBox.page'
-import { MainPage } from '../pageObjects/main.page'
-import { NavigationBar } from '../Utills/Components/navigationBar.page'
+import MainPage from '../pageObjects/main.page'
+import NavigationBar from '../Utills/Components/navigationBar.page'
 import { removeMainAds, removeSideAds } from '../Utills/functions'
 
 test.describe('Testing functionality of "Check Box" page', () => {

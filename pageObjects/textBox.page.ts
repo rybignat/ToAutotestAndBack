@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test'
 
-export class TextBox {
+export default class TextBox {
   page: Page
   fullNameInput: Locator
   emailInput: Locator

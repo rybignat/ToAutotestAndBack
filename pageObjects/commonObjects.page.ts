@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 
-export class CommonObjects {
+export default class CommonObjects {
   page: Page
   logo: Locator
   header: Locator
