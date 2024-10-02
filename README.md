@@ -91,8 +91,6 @@ README.md
 Main files and folders:
 
 - **Utills/Components**: Contains application components.
-- **pageObjects/**: Contains the described application pages.
 - **pageObjects/main.page.js**: An example of a page organized according to the Page Object Model.
 - **Utills/**: Utility functions, such as `functions.js` or `customReporter.js`.
-- **tests/**: Contains *spec* files - that is, test scripts / suites.
 - **.github/workflows/playwright.yml**: CI configuration to run tests automatically.
