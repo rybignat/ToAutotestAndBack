@@ -2,44 +2,43 @@ import { type Locator, type Page, expect } from '@playwright/test'
 
 export default class Buttons {
   page: Page
-  buttons: { [key: string]: string } = {
-    doubleClick: '//button[@id="doubleClickBtn"]',
-    rightClick: '//button[@id="rightClickBtn"]',
-    dynamicClick: '//button[text()="Click Me"]'
-  }
+  doubleClickButton: Locator
+  rightClickButton: Locator
+  dynamicClickButton: Locator
 
   outputArea: { [key: string]: string } = {
-    doubleClick: '//p[@id="doubleClickMessage"]',
-    rightClick: '//p[@id="rightClickMessage"]',
-    dynamicClick: '//p[@id="dynamicClickMessage"]'
+    'double click': '//p[@id="doubleClickMessage" ]',
+    'right click': '//p[@id="rightClickMessage"]',
+    'dynamic click': '//p[@id="dynamicClickMessage"]'
   }
 
   constructor (page: Page) {
     this.page = page
+    this.doubleClickButton = page.locator('//button[@id="doubleClickBtn"]')
+    this.rightClickButton = page.locator('//button[@id="rightClickBtn"]')
+    this.dynamicClickButton = page.locator('//button[text()="Click Me"]')
   }
 
-  async doubleClickButtonByName (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.buttons[key])
-    await expect(locator).toBeVisible()
-    await locator.dblclick()
+  async clickDoubleClickButton (): Promise<void> {
+    await expect(this.doubleClickButton).toBeVisible()
+    await this.doubleClickButton.dblclick()
   }
 
-  async rightClickButtonByName (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.buttons[key])
-    await expect(locator).toBeVisible()
-    await locator.click({
+  async clickRightClickButton (): Promise<void> {
+    await expect(this.rightClickButton).toBeVisible()
+    await this.rightClickButton.click({
       button: 'right'
     })
   }
 
-  async clickButtonByName (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.buttons[key])
-    await expect(locator).toBeVisible()
-    await locator.click()
+  async clickDynamicButton (): Promise<void> {
+    await expect(this.dynamicClickButton).toBeVisible()
+    await this.dynamicClickButton.click()
   }
 
-  async checkIsMsgAprsInResult (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.outputArea[key])
+  async checkMessageVisibilityAndTextContent (buttonName: string): Promise<void> {
+    const locator: Locator = this.page.locator(this.outputArea[buttonName])
     await expect(locator).toBeVisible()
+    await expect(locator).toContainText(`You have done a ${buttonName}`)
   }
 }
