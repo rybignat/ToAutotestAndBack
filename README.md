@@ -62,6 +62,7 @@ pageObjects/
 ├──textBox.page.ts
 ├──radioButton.page.ts
 ├──main.page.ts
+├──buttons.page.ts
 └──commonObjects.page.ts
 
 test-results/
@@ -69,6 +70,7 @@ test-results/
 tests/
 ├──checkBox.spec.ts
 ├──radioButton.spec.ts
+├──buttons.spec.ts
 └──textBox.spec.ts
 
 Utills/
