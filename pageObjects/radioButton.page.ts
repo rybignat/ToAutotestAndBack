@@ -4,7 +4,7 @@ export default class RadioButtonPage {
   page: Page
   noButton: Locator
   outputArea: Locator
-  radioButtons: { [key: string]: string } = {
+  radioButtons: { [buttonName: string]: string } = {
     Yes: '//input[@id="yesRadio"]',
     Impressive: '//input[@id="impressiveRadio"]'
   }
@@ -15,9 +15,8 @@ export default class RadioButtonPage {
     this.noButton = page.locator('//input[@id="noRadio"]')
   }
 
-  async clickRadioButtonByName (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.radioButtons[key])
-    await expect(locator).toBeVisible()
+  async clickRadioButtonByName (buttonName: string): Promise<void> {
+    const locator: Locator = this.page.locator(this.radioButtons[buttonName])
     await locator.click({ force: true })
     await expect(locator).toBeChecked()
   }

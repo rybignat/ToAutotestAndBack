@@ -5,8 +5,8 @@ export default class LinksPage {
   page: Page
   homeLink: Locator
   homeDynamicLink: Locator
-  textMessageArea: Locator
-  linkLocators: { [key: string]: string } = {
+  outputArea: Locator
+  linkLocators: { [linkName: string]: string } = {
     Created: '//p//a[@id="created"]',
     'No Content': '//p//a[@id="no-content"]',
     Moved: '//p//a[@id="moved"]',
@@ -20,31 +20,33 @@ export default class LinksPage {
     this.page = page
     this.homeLink = page.locator('//p//a[@id="simpleLink"]')
     this.homeDynamicLink = page.locator('//p//a[@id="dynamicLink"]')
-    this.textMessageArea = page.locator('//p[@id="linkResponse"]')
+    this.outputArea = page.locator('//p[@id="linkResponse"]')
   }
 
-  async clickLinkByName (key: string): Promise<void> {
-    const locator: Locator = this.page.locator(this.linkLocators[key])
-    await expect(locator).toBeVisible()
+  async clickLinkByName (linkName: string): Promise<void> {
+    const locator: Locator = this.page.locator(this.linkLocators[linkName])
     await locator.click()
   }
 
   async checkResultMessage (statusCode: number, statusText: string): Promise<void> {
-    if (statusText === 'Moved') {
-      statusText = 'Moved Permanently'
-    }
-    const result: string = await this.textMessageArea.textContent() as string
-    const expectedResult = `Link has responded with staus ${statusCode} and status text ${statusText}`
+    const finalStatusText = statusText === 'Moved' ? `${statusText} Permanently` : statusText
+
+    const result = await this.outputArea.textContent()
+    const expectedResult = `Link has responded with staus ${statusCode} and status text ${finalStatusText}`
+
     expect(result).toEqual(expectedResult)
   }
 
   async checkStatusTextAndCodeInResponse (statusCode: number, statusText: string): Promise<void> {
-    if (statusText === 'Not Found') {
-      statusText = 'invalid-url'
-    }
+    const finalStatusText = statusText === 'Not Found'
+      ? 'invalid-url'
+      : statusText.toLowerCase().replace(' ', '-')
+
     await this.page.waitForResponse(response =>
-      response.url() === `https://demoqa.com/${statusText.toLowerCase().replace(' ', '-')}` && response.status() === statusCode &&
-      response.request().method() === 'GET')
+      response.url() === `https://demoqa.com/${finalStatusText}` &&
+      response.status() === statusCode &&
+      response.request().method() === 'GET'
+    )
   }
 
   async openAndCheckNewPage (context: BrowserContext, isLinkDynamic?: boolean): Promise<void> {

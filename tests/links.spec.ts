@@ -27,8 +27,8 @@ test.describe('Check the functioning of the "Links" section', () => {
     })
   })
 
-  test('CASE_2: Verify Invalid(Dynamic) Link Functionality ("Home9IiLG")', async ({ context }) => {
-    await test.step('Click on the "Home9IiLG" link.(Expected result: A new tab opens, navigating to the home page', async () => {
+  test('CASE_2: Verify Dynamic Link Functionality', async ({ context }) => {
+    await test.step('Click on the dynamic link.(Expected result: A new tab opens, navigating to the home page', async () => {
       await linksPage.openAndCheckNewPage(context, true)
     })
   })
