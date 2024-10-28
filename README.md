@@ -63,6 +63,7 @@ pageObjects/
 ├──radioButton.page.ts
 ├──main.page.ts
 ├──buttons.page.ts
+├──links.page.ts
 └──commonObjects.page.ts
 
 test-results/
@@ -71,11 +72,13 @@ tests/
 ├──checkBox.spec.ts
 ├──radioButton.spec.ts
 ├──buttons.spec.ts
+├──links.spec.ts
 └──textBox.spec.ts
 
 Utills/
 ├──Components/
-|   └──navigationBar.ts
+|   ├──registrationForm.page.ts
+|   └──navigationBar.page.ts
 ├──cusomReporter.ts
 ├──functions.ts
 └──types.ts
