@@ -42,7 +42,6 @@ export default class BrokenLinksImagesPage {
       ),
       this.validLink.click()
     ])
-
     expect(response.status()).toBe(200)
     expect(response.request().method()).toBe('GET')
   }
