@@ -64,6 +64,7 @@ pageObjects/
 ├──main.page.ts
 ├──buttons.page.ts
 ├──links.page.ts
+├──uploadAndDownload.page.ts
 └──commonObjects.page.ts
 
 test-results/
@@ -73,9 +74,12 @@ tests/
 ├──radioButton.spec.ts
 ├──buttons.spec.ts
 ├──links.spec.ts
+├──uploadAndDownload.spec.ts
 └──textBox.spec.ts
 
 Utills/
+├──uploads
+|    └──sampleFile.jpeg
 ├──Components/
 |   ├──registrationForm.page.ts
 |   └──navigationBar.page.ts
