@@ -7,9 +7,9 @@ export default class UploadAndDownloadPage {
   dowloadButton: Locator
   uploadButton: Locator
   outputArea: Locator
-  downloadsDir = path.join(__dirname, '../Utills/downloads')
-  uploadFilePath = path.join(__dirname, '../Utills/uploads/sampleFile.jpeg')
-  uploadFileName = fs.readdirSync(path.join(__dirname, '../Utills/uploads'))
+  downloadsDir = path.join(__dirname, '../Utills/Downloads')
+  uploadFilePath = path.join(__dirname, '../Utills/Uploads/sampleFile.jpeg')
+  uploadFileName = fs.readdirSync(path.join(__dirname, '../Utills/Uploads'))
   downloadPath: string | undefined
 
   constructor (page: Page) {

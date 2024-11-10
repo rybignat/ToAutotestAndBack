@@ -58,31 +58,33 @@ Project structure:
 node_modules/
 
 pageObjects/
-├──checkBox.page.ts
-├──textBox.page.ts
-├──radioButton.page.ts
-├──main.page.ts
+├──brokenlinks_images.ts
 ├──buttons.page.ts
+├──checkBox.page.ts
+├──commonObjects.page.ts
 ├──links.page.ts
-├──uploadAndDownload.page.ts
-└──commonObjects.page.ts
+├──main.page.ts
+├──radioButton.page.ts
+├──textBox.page.ts
+└──uploadAndDownload.page.ts
 
 test-results/
 
 tests/
-├──checkBox.spec.ts
-├──radioButton.spec.ts
+├──brokenlinks_images.spec.ts
 ├──buttons.spec.ts
+├──checkBox.spec.ts
 ├──links.spec.ts
-├──uploadAndDownload.spec.ts
-└──textBox.spec.ts
+├──radioButton.spec.ts
+├──textBox.spec.ts
+└──uploadAndDownload.spec.ts
 
 Utills/
-├──uploads
-|    └──sampleFile.jpeg
 ├──Components/
 |   ├──registrationForm.page.ts
 |   └──navigationBar.page.ts
+├──Uploads
+|    └──sampleFile.jpeg
 ├──cusomReporter.ts
 ├──functions.ts
 └──types.ts
@@ -93,13 +95,14 @@ Utills/
 package-lock.json
 package.json
 playwright.config.ts
-tsconfig.json
 README.md
+tsconfig.json
 ```
 
 Main files and folders:
 
 - **Utills/Components**: Contains application components.
+- **Utills/Uploads**: Contains samples for tests.
 - **pageObjects/main.page.js**: An example of a page organized according to the Page Object Model.
 - **Utills/**: Utility functions, such as `functions.js` or `customReporter.js`.
 - **.github/workflows/playwright.yml**: CI configuration to run tests automatically.
