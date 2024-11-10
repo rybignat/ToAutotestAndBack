@@ -64,12 +64,10 @@ pageObjects/
 ├──main.page.ts
 ├──buttons.page.ts
 ├──links.page.ts
-├──uploadDownload.page.ts
+├──uploadAndDownload.page.ts
 └──commonObjects.page.ts
 
 test-results/
-
-
 
 tests/
 ├──checkBox.spec.ts

@@ -4,13 +4,13 @@ import fs from 'fs'
 
 export default class UploadAndDownloadPage {
   page: Page
+  dowloadButton: Locator
+  uploadButton: Locator
+  outputArea: Locator
   downloadsDir = path.join(__dirname, '../Utills/downloads')
   uploadFilePath = path.join(__dirname, '../Utills/uploads/sampleFile.jpeg')
   uploadFileName = fs.readdirSync(path.join(__dirname, '../Utills/uploads'))
   downloadPath: string | undefined
-  dowloadButton: Locator
-  uploadButton: Locator
-  outputArea: Locator
 
   constructor (page: Page) {
     this.page = page
@@ -20,18 +20,12 @@ export default class UploadAndDownloadPage {
   }
 
   async downloadFile (): Promise<void> {
-    const downloadPromise = this.page.waitForEvent('download')
-    await this.dowloadButton.click()
-    const download = await downloadPromise
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download'),
+      this.dowloadButton.click()
+    ])
     this.downloadPath = path.join(this.downloadsDir, download.suggestedFilename())
     await download.saveAs(this.downloadPath)
-  }
-
-  async checkIsFileExists (): Promise<boolean> {
-    if (this.downloadPath == null || this.downloadPath === '') {
-      throw new Error('File dosen`t exist')
-    }
-    return fs.existsSync(this.downloadPath)
   }
 
   async removeDonwloadsFolder (): Promise<void> {
@@ -40,6 +34,13 @@ export default class UploadAndDownloadPage {
 
   async uploadFile (): Promise<void> {
     await this.uploadButton.setInputFiles(this.uploadFilePath)
+  }
+
+  async checkIsFileExists (): Promise<boolean> {
+    if (this.downloadPath == null || this.downloadPath === '') {
+      throw new Error('File dosen`t exist')
+    }
+    return fs.existsSync(this.downloadPath)
   }
 
   async checkIsFilepathCorrect (): Promise<void> {
