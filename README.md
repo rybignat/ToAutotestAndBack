@@ -64,18 +64,24 @@ pageObjects/
 ├──main.page.ts
 ├──buttons.page.ts
 ├──links.page.ts
+├──uploadDownload.page.ts
 └──commonObjects.page.ts
 
 test-results/
+
+
 
 tests/
 ├──checkBox.spec.ts
 ├──radioButton.spec.ts
 ├──buttons.spec.ts
 ├──links.spec.ts
+├──uploadAndDownload.spec.ts
 └──textBox.spec.ts
 
 Utills/
+├──uploads
+|    └──sampleFile.jpeg
 ├──Components/
 |   ├──registrationForm.page.ts
 |   └──navigationBar.page.ts
