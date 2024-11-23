@@ -25,7 +25,7 @@ export default class RadioButtonPage {
     await expect(this.noButton).toBeDisabled()
   }
 
-  async checkisElementVisibleInResult (element: string): Promise<void> {
+  async checkIsElementVisibleInResult (element: string): Promise<void> {
     await expect(this.outputArea).toContainText(`${element}`)
   }
 }

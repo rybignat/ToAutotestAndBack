@@ -79,7 +79,7 @@ tests/
 ├──textBox.spec.ts
 └──uploadAndDownload.spec.ts
 
-Utills/
+Utils/
 ├──Components/
 |   ├──registrationForm.page.ts
 |   └──navigationBar.page.ts
@@ -101,8 +101,8 @@ tsconfig.json
 
 Main files and folders:
 
-- **Utills/Components**: Contains application components.
-- **Utills/Uploads**: Contains samples for tests.
+- **Utils/Components**: Contains application components.
+- **Utils/Uploads**: Contains samples for tests.
 - **pageObjects/main.page.js**: An example of a page organized according to the Page Object Model.
-- **Utills/**: Utility functions, such as `functions.js` or `customReporter.js`.
+- **Utils/**: Utility functions, such as `functions.js` or `customReporter.js`.
 - **.github/workflows/playwright.yml**: CI configuration to run tests automatically.

@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import TextBox from '../pageObjects/textBox.page'
 import MainPage from '../pageObjects/main.page'
-import NavigationBar from '../Utills/Components/navigationBar.page'
+import NavigationBar from '.././Utils/Components/navigationBar.page'
 
 test.describe('Testing functionality of "Text Box" page', () => {
   let mainPage: MainPage

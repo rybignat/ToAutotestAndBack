@@ -1,8 +1,8 @@
 import { test } from '@playwright/test'
 import RadioButtonPage from '../pageObjects/radioButton.page'
 import MainPage from '../pageObjects/main.page'
-import NavigationBar from '../Utills/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '../Utills/functions'
+import NavigationBar from '.././Utils/Components/navigationBar.page'
+import { removeMainAds, removeSideAds } from '.././Utils/functions'
 
 test.describe('Check the functioning of the "Radio Button" section', () => {
   let mainPage: MainPage
@@ -26,7 +26,7 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
       await radioButtonPage.clickRadioButtonByName('Yes')
     })
     await test.step('Check the result (expecting "Yes")', async () => {
-      await radioButtonPage.checkisElementVisibleInResult('Yes')
+      await radioButtonPage.checkIsElementVisibleInResult('Yes')
     })
   })
 
@@ -35,7 +35,7 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
       await radioButtonPage.clickRadioButtonByName('Impressive')
     })
     await test.step('Check the result (expecting "Impressive")', async () => {
-      await radioButtonPage.checkisElementVisibleInResult('Impressive')
+      await radioButtonPage.checkIsElementVisibleInResult('Impressive')
     })
   })
 
@@ -50,13 +50,13 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
       await radioButtonPage.clickRadioButtonByName('Yes')
     })
     await test.step('Check result(expecting "Yes"', async () => {
-      await radioButtonPage.checkisElementVisibleInResult('Yes')
+      await radioButtonPage.checkIsElementVisibleInResult('Yes')
     })
     await test.step('Click "Impressive" button', async () => {
       await radioButtonPage.clickRadioButtonByName('Impressive')
     })
     await test.step('Check result (expecting "Impressive")', async () => {
-      await radioButtonPage.checkisElementVisibleInResult('Impressive')
+      await radioButtonPage.checkIsElementVisibleInResult('Impressive')
     })
     await test.step('CHeck that "No" button is disabled', async () => {
       await radioButtonPage.isButtonDisabled()

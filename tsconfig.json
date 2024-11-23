@@ -5,12 +5,16 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true, // Add support for JSON modules
+    "allowJs": true, // Allow JavaScript files if needed
+    "types": ["@types/node", "@playwright/test"], // Include Node.js and Playwright types
   },
   "include": [
     "tests/**/*.ts",
-    "Utills/**/*.ts",
-    "pageObjects/**/*.ts",
+    "Utils/**/*.ts",
+    "pageObjects/**/*.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test'
 import CheckBoxPage from '../pageObjects/checkBox.page'
 import MainPage from '../pageObjects/main.page'
-import NavigationBar from '../Utills/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '../Utills/functions'
+import NavigationBar from '.././Utils/Components/navigationBar.page'
+import { removeMainAds, removeSideAds } from '.././Utils/functions'
 
 test.describe('Testing functionality of "Check Box" page', () => {
   let mainPage: MainPage
@@ -43,7 +43,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })
@@ -64,7 +64,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })
@@ -85,7 +85,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })
@@ -106,7 +106,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })
@@ -127,7 +127,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })
@@ -148,7 +148,7 @@ test.describe('Testing functionality of "Check Box" page', () => {
     })
     await test.step('Проверяем,что каждый выбраный элемент присутствует в результатах на странице', async () => {
       for (const element of formatedArray) {
-        const isElementVisible: boolean = await checkBoxPage.checkisElementVisibleInResult(element)
+        const isElementVisible: boolean = await checkBoxPage.checkIsElementVisibleInResult(element)
         expect(isElementVisible).toBe(true)
       }
     })

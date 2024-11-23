@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0, // Повторные попытки в CI
   workers: process.env.CI ? 1 : 1, // Количество воркеров в CI
   reportSlowTests: null,
-  reporter: [['list'], ['./Utills/customReporter.ts']], // Используемый репортер
+  reporter: [['list'], ['./Utils/customReporter.ts']], // Используемый репортер
 
   use: {
     baseURL: 'https://demoqa.com/',
@@ -21,7 +21,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: isGitHubActions,
+        headless: true,
       },
     },
   ],

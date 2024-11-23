@@ -1,8 +1,8 @@
 import { test } from '@playwright/test'
 import ButtonsPage from '../pageObjects/buttons.page'
 import MainPage from '../pageObjects/main.page'
-import NavigationBar from '../Utills/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '../Utills/functions'
+import NavigationBar from '.././Utils/Components/navigationBar.page'
+import { removeMainAds, removeSideAds } from '../Utils/functions'
 
 test.describe('Check the functioning of the "Buttons" section', () => {
   let mainPage: MainPage

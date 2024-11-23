@@ -1,5 +1,5 @@
 import { type Locator, type Page } from '@playwright/test'
-import { scrollToElement } from '../Utills/functions'
+import { scrollToElement } from '../Utils/functions'
 
 export default class CheckBoxPage {
   page: Page
@@ -46,10 +46,6 @@ export default class CheckBoxPage {
     return [...resultArray, ...parentsArray]
   }
 
-  async sortArray (array: string[]): Promise<string[]> {
-    return array.sort()
-  }
-
   async getSpanQuantity (): Promise<number> {
     const spanElements = await this.page.locator('//div[@id="result"]/span').count()
     return spanElements - 1
@@ -89,7 +85,7 @@ export default class CheckBoxPage {
     return parentsArray
   }
 
-  async checkisElementVisibleInResult (element: string): Promise<boolean> {
+  async checkIsElementVisibleInResult (element: string): Promise<boolean> {
     return await this.page.locator(`//div[@id="result"]/span[text()="${element}"]`).isVisible()
   }
 }

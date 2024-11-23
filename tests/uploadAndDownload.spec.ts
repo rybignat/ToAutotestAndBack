@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test'
 import UploadAndDownloadPage from '../pageObjects/uploadAndDownload.page'
 import MainPage from '../pageObjects/main.page'
-import NavigationBar from '../Utills/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '../Utills/functions'
+import NavigationBar from '.././Utils/Components/navigationBar.page'
+import { removeMainAds, removeSideAds } from '../Utils/functions'
 
 test.describe('Check the functioning of the "Upload and Download" section', () => {
   let mainPage: MainPage
@@ -30,7 +30,7 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
       expect(doesFileExist).toBeTruthy()
       if (doesFileExist) {
         await test.step('Clear download directory', async () => {
-          await uploadAndDownloadPage.removeDonwloadsFolder()
+          await uploadAndDownloadPage.removeDownloadsFolder()
         })
       }
     })
