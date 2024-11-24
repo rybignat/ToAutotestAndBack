@@ -39,7 +39,7 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
   })
 
   test('CASE_2: Verify the "Will Enable 5 Seconds" button behavior', async () => {
-    await test.step('Check that button is unavailable for 5 seconds', async () => {
+    await test.step('Check that button is unavailable', async () => {
       await dynamicPropertiesPage.isButtonDisabled()
     })
     await test.step('Check that button is available in 10 seconds', async () => {
@@ -59,8 +59,8 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
   })
 
   test('CASE_4: Verify the visibility behavior of the "Visible After 5 Seconds" button', async () => {
-    await test.step('Check that button is not visible for 5 seconds', async () => {
-      await dynamicPropertiesPage.isButtonNotVisible()
+    await test.step('Check that button is hidden', async () => {
+      await dynamicPropertiesPage.isButtonHidden()
     })
     await test.step('Check that button is visible in 10 seconds', async () => {
       await dynamicPropertiesPage.isButtonVisible()

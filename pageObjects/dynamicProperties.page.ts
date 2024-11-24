@@ -39,7 +39,7 @@ export default class DynamicPropertiesPage {
     await expect(this.visibleAfter5secButton).toBeVisible({ timeout: 10000 })
   }
 
-  async isButtonNotVisible (): Promise<void> {
+  async isButtonHidden (): Promise<void> {
     await expect(this.visibleAfter5secButton).toBeHidden()
   }
 }

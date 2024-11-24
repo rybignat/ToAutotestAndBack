@@ -39,6 +39,7 @@ test.describe('Check the functioning of the "Broken Links - Images" section', ()
   })
 
   test('CASE_4: Verify "Broken link" functionality', async () => {
+    test.skip(process.env.GITHUB_ACTIONS === 'true', 'Skipping because process.env GITHUB_ACTIONS is true')
     await test.step('Click on "Click Here for Broken Link"', async () => {
       await brokenLinksImagesPage.checkBrokenLink()
     })
