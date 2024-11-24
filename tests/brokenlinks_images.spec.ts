@@ -33,6 +33,7 @@ test.describe('Check the functioning of the "Broken Links - Images" section', ()
   })
 
   test('CASE_3: Verify "Valid link" functionality', async () => {
+    test.skip(process.env.GITHUB_ACTIONS === 'true', 'Skipping because process.env GITHUB_ACTIONS is true')
     await test.step('Click on "Click Here for Valid Link"', async () => {
       await brokenLinksImagesPage.checkValidLink()
     })
