@@ -29,7 +29,6 @@ export default class NavigationBar {
     const parentName: string | undefined = await findKeyByValue(this.navigationBarStructure, elementName)
 
     if (typeof (parentName) !== 'string') {
-      // @ts-expect-error
       process.exit(1)
     }
 
