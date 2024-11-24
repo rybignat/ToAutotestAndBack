@@ -62,6 +62,7 @@ pageObjects/
 ├──buttons.page.ts
 ├──checkBox.page.ts
 ├──commonObjects.page.ts
+├──dynamicProperties.page.ts
 ├──links.page.ts
 ├──main.page.ts
 ├──radioButton.page.ts
@@ -74,6 +75,7 @@ tests/
 ├──brokenlinks_images.spec.ts
 ├──buttons.spec.ts
 ├──checkBox.spec.ts
+├──dynamicProperties.spec.ts
 ├──links.spec.ts
 ├──radioButton.spec.ts
 ├──textBox.spec.ts
