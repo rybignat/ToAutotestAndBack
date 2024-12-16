@@ -67,7 +67,8 @@ pageObjects/
 ├──main.page.ts
 ├──radioButton.page.ts
 ├──textBox.page.ts
-└──uploadAndDownload.page.ts
+├──uploadAndDownload.page.ts
+└──webTables.page.ts
 
 test-results/
 
@@ -79,12 +80,13 @@ tests/
 ├──links.spec.ts
 ├──radioButton.spec.ts
 ├──textBox.spec.ts
-└──uploadAndDownload.spec.ts
+├──uploadAndDownload.spec.ts
+└──webTables.spec.ts
 
 Utils/
 ├──Components/
-|   ├──registrationForm.page.ts
-|   └──navigationBar.page.ts
+|   ├──navigationBar.page.ts
+|   └──registrationForm.page.ts
 ├──Uploads
 |    └──sampleFile.jpeg
 ├──cusomReporter.ts
