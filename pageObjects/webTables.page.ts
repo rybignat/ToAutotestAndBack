@@ -7,7 +7,7 @@ export default class WebTablesPage {
   previousPageButton: Locator
   nextPageButton: Locator
   pageNumber: Locator
-  rowsPerPageMenu: Locator
+  rowsPerPageDropdownMenu: Locator
 
   constructor (page: Page) {
     this.page = page
@@ -16,7 +16,7 @@ export default class WebTablesPage {
     this.nextPageButton = page.locator('//div[@class="-pagination"]/div/button[text()="Next"]')
     this.pageNumber = page.locator('//div[@class="-pageJump"]/input')
     this.searchInput = page.locator('//input[@id="searchBox"]')
-    this.rowsPerPageMenu = page.locator('//span/select[@aria-label="rows per page"]')
+    this.rowsPerPageDropdownMenu = page.locator('//span/select[@aria-label="rows per page"]')
   }
 
   async isUserAppearsInWebTable (userEmail: string, condition: boolean): Promise<void> {
@@ -41,17 +41,7 @@ export default class WebTablesPage {
     return cellContent.trim()
   }
 
-  async verifyRowsQuantityOnWebTable (expectedQuantity: number): Promise<void> {
-    const quantity = this.page.locator('//div[@class="rt-tbody"]/div')
-    await expect(quantity).toHaveCount(expectedQuantity)
-  }
-
-  async verifyUsersQuantityOnWebTable (userEmail: string, expectedQuantity: number): Promise<void> {
-    const usersQuantity = this.page.locator(`//div[@role="gridcell"][text()="${userEmail}"]`)
-    await expect(usersQuantity).toHaveCount(expectedQuantity)
-  }
-
-  async editUserButtonClick (userEmail: string): Promise<void> {
+  async clickEditUserButton (userEmail: string): Promise<void> {
     const editButtonLocator = this.page.locator(`//div[@role="gridcell"][text()="${userEmail}"]/parent::div/descendant::span[@title="Edit"]`)
     await editButtonLocator.click()
   }
@@ -82,12 +72,21 @@ export default class WebTablesPage {
   }
 
   async goToPageByNumber (pageNumber: number): Promise<void> {
-    await this.page.waitForTimeout(3000)
     await this.pageNumber.fill(pageNumber.toString())
     await this.page.keyboard.press('Enter')
   }
 
   async selectQuantityOfRows (value: number): Promise<void> {
-    await this.rowsPerPageMenu.selectOption({ value: `${value}` })
+    await this.rowsPerPageDropdownMenu.selectOption({ value: value.toString() })
+  }
+
+  async verifyRowsQuantityOnWebTable (expectedQuantity: number): Promise<void> {
+    const quantity = this.page.locator('//div[@class="rt-tbody"]/div')
+    await expect(quantity).toHaveCount(expectedQuantity)
+  }
+
+  async verifyUsersQuantityOnWebTable (userEmail: string, expectedQuantity: number): Promise<void> {
+    const usersQuantity = this.page.locator(`//div[@role="gridcell"][text()="${userEmail}"]`)
+    await expect(usersQuantity).toHaveCount(expectedQuantity)
   }
 }

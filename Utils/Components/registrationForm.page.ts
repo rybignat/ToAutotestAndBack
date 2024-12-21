@@ -16,7 +16,7 @@ export default class RegistrationFormPage {
   departmentInput: Locator
   errorColor: string = 'rgb(220, 53, 69)'
   successColor: string = 'rgb(40, 167, 69)'
-  fieldsNames: { [key: string]: string } = {
+  inputFieldsNames: { [key: string]: string } = {
     'First Name': 'firstName',
     'Last Name': 'lastName',
     Age: 'age',
@@ -37,15 +37,6 @@ export default class RegistrationFormPage {
     this.salaryInput = page.locator('//div/input[@id="salary"]')
     this.departmentInput = page.locator('//div/input[@id="department"]')
     this.ageInput = page.locator('//div/input[@id="age"]')
-  }
-
-  async isModalWindowHeaderVisible (): Promise<boolean> {
-    return await this.header.isVisible()
-  }
-
-  async checkForInputError (expectedColor: 'successColor' | 'errorColor', currentField: Locator): Promise<void> {
-    const color: string = expectedColor === 'errorColor' ? this.errorColor : this.successColor
-    await expect(currentField).toHaveCSS('border-color', color)
   }
 
   async enterFirstName (firstName: string): Promise<void> {
@@ -86,8 +77,8 @@ export default class RegistrationFormPage {
     await this.page.waitForTimeout(3000)
   }
 
-  async getValueFromElement (fieldName: string): Promise<string> {
-    const valueLocator: Locator = this.page.locator(`//div/input[@id="${this.fieldsNames[fieldName]}"]`)
+  async getValueFromInputField (inputFieldName: string): Promise<string> {
+    const valueLocator: Locator = this.page.locator(`//div/input[@id="${this.inputFieldsNames[inputFieldName]}"]`)
     const value: string | null = await valueLocator.getAttribute('value')
     if (value !== null && value !== undefined) {
       return value
@@ -96,7 +87,7 @@ export default class RegistrationFormPage {
   }
 
   async clearInputField (fieldName: string): Promise<void> {
-    const fieldLocator: Locator = this.page.locator(`//div/input[@id="${this.fieldsNames[fieldName]}"]`)
+    const fieldLocator: Locator = this.page.locator(`//div/input[@id="${this.inputFieldsNames[fieldName]}"]`)
     await fieldLocator.clear()
   }
 
@@ -111,9 +102,19 @@ export default class RegistrationFormPage {
     await this.clickSubmitButton()
   }
 
-  async createSpecNumberOfUsers (user: UserRegistration, usersQuantity: number): Promise<void> {
+  async createSpecifiedNumberOfUsers (user: UserRegistration, usersQuantity: number): Promise<void> {
     for (let i = 0; i < usersQuantity; i++) {
       await this.makeUser(user)
     }
+    await this.page.waitForTimeout(3000)
+  }
+
+  async isModalWindowHeaderVisible (): Promise<boolean> {
+    return await this.header.isVisible()
+  }
+
+  async checkForInputError (expectedColor: 'successColor' | 'errorColor', currentField: Locator): Promise<void> {
+    const color: string = expectedColor === 'errorColor' ? this.errorColor : this.successColor
+    await expect(currentField).toHaveCSS('border-color', color)
   }
 }

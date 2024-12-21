@@ -99,7 +99,7 @@ test.describe('Check functionality of WebTables page', () => {
         await webTablesPage.selectQuantityOfRows(expRowsQuantity)
       })
       await test.step('Create new users', async () => {
-        await registrationFormPage.createSpecNumberOfUsers(userData, 7)
+        await registrationFormPage.createSpecifiedNumberOfUsers(userData, 7)
       })
       await test.step('Check that created users appears in web table', async () => {
         await webTablesPage.verifyUsersQuantityOnWebTable(userData.email, 2)
@@ -126,7 +126,7 @@ test.describe('Check functionality of WebTables page', () => {
         await webTablesPage.selectQuantityOfRows(expRowsQuantity)
       })
       await test.step('Create new users', async () => {
-        await registrationFormPage.createSpecNumberOfUsers(userData, 7)
+        await registrationFormPage.createSpecifiedNumberOfUsers(userData, 7)
       })
       await test.step('Check that created users appears in web table', async () => {
         await webTablesPage.verifyUsersQuantityOnWebTable(userData.email, 2)
@@ -350,31 +350,31 @@ test.describe('Check functionality of WebTables page', () => {
           await registrationFormPage.makeUser(userData)
         })
         await test.step('Click on "Edit" button of test user', async () => {
-          await webTablesPage.editUserButtonClick(userData.email)
+          await webTablesPage.clickEditUserButton(userData.email)
         })
       })
       await test.step(`Check that user First Name in registration form is ${userData.firstName}`, async () => {
-        const currentFirstName = await registrationFormPage.getValueFromElement('First Name')
+        const currentFirstName = await registrationFormPage.getValueFromInputField('First Name')
         expect(userData.firstName).toBe(currentFirstName)
       })
       await test.step(`Check that user Last Name in registration form is ${userData.lastName}`, async () => {
-        const currentLastName = await registrationFormPage.getValueFromElement('Last Name')
+        const currentLastName = await registrationFormPage.getValueFromInputField('Last Name')
         expect(userData.lastName).toBe(currentLastName)
       })
       await test.step(`Check that user Email in table is ${userData.email}`, async () => {
-        const currentEmail = await registrationFormPage.getValueFromElement('Email')
+        const currentEmail = await registrationFormPage.getValueFromInputField('Email')
         expect(userData.email).toBe(currentEmail)
       })
       await test.step(`Check that user Age in table is ${userData.age}`, async () => {
-        const currentAge = await registrationFormPage.getValueFromElement('Age')
+        const currentAge = await registrationFormPage.getValueFromInputField('Age')
         expect(userData.age).toBe(currentAge)
       })
       await test.step(`Check that user Salary in table is ${userData.salary}`, async () => {
-        const currentSalary = await registrationFormPage.getValueFromElement('Salary')
+        const currentSalary = await registrationFormPage.getValueFromInputField('Salary')
         expect(userData.salary).toBe(currentSalary)
       })
       await test.step(`Check that user Department in table is ${userData.department}`, async () => {
-        const currentDepartment = await registrationFormPage.getValueFromElement('Department')
+        const currentDepartment = await registrationFormPage.getValueFromInputField('Department')
         expect(userData.department).toBe(currentDepartment)
       })
       await test.step('Close registration form', async () => {
@@ -398,7 +398,7 @@ test.describe('Check functionality of WebTables page', () => {
         })
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(userData.email)
+        await webTablesPage.clickEditUserButton(userData.email)
       })
       await test.step('Clear current First Name', async () => {
         await registrationFormPage.clearInputField('First Name')
@@ -414,7 +414,7 @@ test.describe('Check functionality of WebTables page', () => {
         expect(cellContent).toBe(spareUserData.firstName)
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(userData.email)
+        await webTablesPage.clickEditUserButton(userData.email)
       })
       await test.step('Clear current Last Name', async () => {
         await registrationFormPage.clearInputField('Last Name')
@@ -430,7 +430,7 @@ test.describe('Check functionality of WebTables page', () => {
         expect(cellContent).toBe(spareUserData.lastName)
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(userData.email)
+        await webTablesPage.clickEditUserButton(userData.email)
       })
       await test.step('Clear current Email', async () => {
         await registrationFormPage.clearInputField('Email')
@@ -446,7 +446,7 @@ test.describe('Check functionality of WebTables page', () => {
         cellContent != null ? expect(cellContent).toBe(spareUserData.email) : process.exit(1)
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(spareUserData.email)
+        await webTablesPage.clickEditUserButton(spareUserData.email)
       })
       await test.step('Clear current Age', async () => {
         await registrationFormPage.clearInputField('Age')
@@ -462,7 +462,7 @@ test.describe('Check functionality of WebTables page', () => {
         cellContent != null ? expect(cellContent).toBe(spareUserData.age) : process.exit(1)
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(spareUserData.email)
+        await webTablesPage.clickEditUserButton(spareUserData.email)
       })
       await test.step('Clear current Salary', async () => {
         await registrationFormPage.clearInputField('Salary')
@@ -478,7 +478,7 @@ test.describe('Check functionality of WebTables page', () => {
         cellContent != null ? expect(cellContent).toBe(spareUserData.salary) : process.exit(1)
       })
       await test.step('Click "Edit" button of test user', async () => {
-        await webTablesPage.editUserButtonClick(spareUserData.email)
+        await webTablesPage.clickEditUserButton(spareUserData.email)
       })
       await test.step('Clear current Department', async () => {
         await registrationFormPage.clearInputField('Department')
@@ -514,7 +514,7 @@ test.describe('Check functionality of WebTables page', () => {
         await webTablesPage.clickAddButton()
       })
       await test.step('Check that data is saved', async () => {
-        const currentFirstName = await registrationFormPage.getValueFromElement('First Name')
+        const currentFirstName = await registrationFormPage.getValueFromInputField('First Name')
         expect(userData.firstName).toBe(currentFirstName)
       })
     })
