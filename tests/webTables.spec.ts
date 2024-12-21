@@ -41,7 +41,7 @@ test.describe('Check functionality of WebTables page', () => {
     await removeSideAds(page)
   })
 
-  test('CASE_1: Check the functionality of the delete user button', async () => {
+  test('CASE_1: Verify the functionality of the "Delete" button', async () => {
     await test.step('Pre-conditions', async () => {
       await test.step('Create a new user', async () => {
         await registrationFormPage.makeUser(userData)
@@ -57,7 +57,7 @@ test.describe('Check functionality of WebTables page', () => {
     })
   })
 
-  test('CASE_2: Verify selecting rows per page updates the table display', async () => {
+  test('CASE_2: Verify row selection updates the table display', async () => {
     const expRowsQuantity: rowsOptions = 5
     await test.step(`Select ${expRowsQuantity} rows per page`, async () => {
       await webTablesPage.selectQuantityOfRows(expRowsQuantity)
@@ -67,7 +67,7 @@ test.describe('Check functionality of WebTables page', () => {
     })
   })
 
-  test('CASE_3: Check the functionality of the search area', async () => {
+  test('CASE_3: Verify the functionality of the search field', async () => {
     await test.step('Pre-conditions', async () => {
       await test.step('Create a new users for test', async () => {
         await registrationFormPage.makeUser(userData)
@@ -75,7 +75,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
     await test.step(`Fill search input with ${userData.email}`, async () => {
-      await webTablesPage.searchInputFill(userData.email)
+      await webTablesPage.enterSearchData(userData.email)
     })
     await test.step('Check that searched user appears in web table', async () => {
       await webTablesPage.isUserAppearsInWebTable(userData.email, true)
@@ -92,7 +92,7 @@ test.describe('Check functionality of WebTables page', () => {
     })
   })
 
-  test('CASE_4: Check the functionality of the buttons "Next" and "Previous" on page', async () => {
+  test('CASE_4: Verify the "Next" and "Previous" buttons functionality', async () => {
     await test.step('Pre-conditions', async () => {
       const expRowsQuantity: rowsOptions = 5
       await test.step('Select the number of lines per page equal to 5', async () => {
@@ -119,7 +119,7 @@ test.describe('Check functionality of WebTables page', () => {
     })
   })
 
-  test('CASE_5: Check the functionality of navigating to a page by indicating its number', async () => {
+  test('CASE_5: Verify page navigation by entering a page number', async () => {
     await test.step('Pre-conditions', async () => {
       const expRowsQuantity: rowsOptions = 5
       await test.step('Select the number of lines per page equal to 5', async () => {
@@ -147,7 +147,7 @@ test.describe('Check functionality of WebTables page', () => {
   })
 
   test.describe('Test the modal: Check functionality of Registration form on Web Tables page', () => {
-    test('CASE_1: Open using "Add" button and close using "Close" button', async () => {
+    test('CASE_1:Verify opening and closing of the Registration Form using the "Add" and "Close" buttons', async () => {
       await test.step('Click "Add" button', async () => {
         await webTablesPage.clickAddButton()
       })
@@ -164,7 +164,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
 
-    test('CASE_2: Open using "Add" button and close using "Escape" keyboard button', async () => {
+    test('CASE_2: Verify opening and closing of the Registration Form using the "Add" button and the "Escape" key', async () => {
       await test.step('Click "Add" button', async () => {
         await webTablesPage.clickAddButton()
       })
@@ -172,7 +172,7 @@ test.describe('Check functionality of WebTables page', () => {
         const modalWindowState = await registrationFormPage.isModalWindowHeaderVisible()
         expect(modalWindowState).toBeTruthy()
       })
-      await test.step('Click on the cross in the upper right corner of the modal window', async () => {
+      await test.step('Press "Escape" keyboard button', async () => {
         await registrationFormPage.clickEscapeKeyboardButton()
       })
       await test.step('Check that "Registration form" is not visible', async () => {
@@ -181,7 +181,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
 
-    test('CASE_3: Check the functionality of the error signal when entering incorrect data', async () => {
+    test('CASE_3: Verify error indicators when entering invalid or incomplete data in the Registration Form', async () => {
       await test.step('Click "Add" button', async () => {
         await webTablesPage.clickAddButton()
       })
@@ -190,12 +190,12 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step('Check that "First Name", "Last Name", "Email", "Age", "Salary", "Department" fields signal an error',
         async () => {
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.firstNameInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.lastNameInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.emailInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.ageInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.salaryInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.firstNameInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.lastNameInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.emailInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.ageInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.salaryInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
         })
       await test.step(`Fill the "First Name" field with ${userData.firstName}`, async () => {
         await registrationFormPage.enterFirstName(userData.firstName)
@@ -205,12 +205,12 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step('Check that the error signal has changed to a confirmation signal only in "First Name" field',
         async () => {
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.firstNameInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.lastNameInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.emailInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.ageInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.salaryInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.firstNameInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.lastNameInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.emailInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.ageInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.salaryInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
         })
       await test.step(`Fill the "Last Name" field with ${userData.lastName}`, async () => {
         await registrationFormPage.enterLastName(userData.lastName)
@@ -220,12 +220,12 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step('Check that the error signal has changed to a confirmation signal only in "First Name", "Last Name" fields',
         async () => {
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.firstNameInput)
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.lastNameInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.emailInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.ageInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.salaryInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.firstNameInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.lastNameInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.emailInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.ageInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.salaryInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
         })
       await test.step(`Fill the "Email" field with ${userData.email}`, async () => {
         await registrationFormPage.enterEmail(userData.email)
@@ -235,12 +235,12 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step('Check that the error signal has changed to a confirmation signal only in "First Name", "Last Name", "Email" fields',
         async () => {
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.firstNameInput)
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.lastNameInput)
-          await registrationFormPage.checkForInputError('successColor', registrationFormPage.emailInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.ageInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.salaryInput)
-          await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.firstNameInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.lastNameInput)
+          await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.emailInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.ageInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.salaryInput)
+          await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
         })
       await test.step(`Fill the "Age" field with ${userData.age}`, async () => {
         await registrationFormPage.enterAge(userData.age)
@@ -251,12 +251,12 @@ test.describe('Check functionality of WebTables page', () => {
       await test.step('Check that the error signal has changed to a confirmation signal only in "First Name", "Last Name", "Email",' +
           ' "Age" fields',
       async () => {
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.firstNameInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.lastNameInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.emailInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.ageInput)
-        await registrationFormPage.checkForInputError('errorColor', registrationFormPage.salaryInput)
-        await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.firstNameInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.lastNameInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.emailInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.ageInput)
+        await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.salaryInput)
+        await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
       })
       await test.step(`Fill the "Salary" field with ${userData.salary}`, async () => {
         await registrationFormPage.enterSalary(userData.salary)
@@ -266,12 +266,12 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step('Check that the error signal has changed to a confirmation signal only in "First Name", "Last Name", "Email",' +
         '"Age", "Salary" fields', async () => {
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.firstNameInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.lastNameInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.emailInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.ageInput)
-        await registrationFormPage.checkForInputError('successColor', registrationFormPage.salaryInput)
-        await registrationFormPage.checkForInputError('errorColor', registrationFormPage.departmentInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.firstNameInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.lastNameInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.emailInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.ageInput)
+        await registrationFormPage.checkInputValidationState('successColor', registrationFormPage.salaryInput)
+        await registrationFormPage.checkInputValidationState('errorColor', registrationFormPage.departmentInput)
       })
       await test.step(`Fill the "Department" field with ${userData.department}`, async () => {
         await registrationFormPage.enterDepartment(userData.department)
@@ -284,7 +284,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
 
-    test('CASE_4: Create a new user and check if the data has been transformed in table', async () => {
+    test('CASE_4: Verify user data is correctly added to the Web Table after registration', async () => {
       await test.step('Click "Add" button', async () => {
         await webTablesPage.clickAddButton()
       })
@@ -318,23 +318,23 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step(`Check that user First Name in table is ${userData.firstName}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(userData.email, 'firstName')
-        cellContent != null ? expect(cellContent).toBe(userData.firstName) : process.exit(1)
+        expect(cellContent).toBe(userData.firstName)
       })
       await test.step(`Check that user Last Name in table is ${userData.lastName}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(userData.email, 'lastName')
-        cellContent != null ? expect(cellContent).toBe(userData.lastName) : process.exit(1)
+        expect(cellContent).toBe(userData.lastName)
       })
       await test.step(`Check that user Age in table is ${userData.age}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(userData.email, 'age')
-        cellContent != null ? expect(cellContent).toBe(userData.age) : process.exit(1)
+        expect(cellContent).toBe(userData.age)
       })
       await test.step(`Check that user Salary in table is ${userData.salary}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(userData.email, 'salary')
-        cellContent != null ? expect(cellContent).toBe(userData.salary) : process.exit(1)
+        expect(cellContent).toBe(userData.salary)
       })
       await test.step(`Check that user Department in table is ${userData.department}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(userData.email, 'department')
-        cellContent != null ? expect(cellContent).toBe(userData.department) : process.exit(1)
+        expect(cellContent).toBe(userData.department)
       })
       await test.step('Delete created user', async () => {
         await webTablesPage.deleteUserButtonClick(userData.email)
@@ -344,7 +344,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
 
-    test('CASE_5: Check user data in the registration form window has not been transformed in registration form', async () => {
+    test('CASE_5: Verify user data remains unchanged when displayed in the Registration Form', async () => {
       await test.step('Pre-conditions', async () => {
         await test.step('Create new user', async () => {
           await registrationFormPage.makeUser(userData)
@@ -388,7 +388,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
     })
 
-    test('CASE_6: Check the functionality of the ability to edit an existing user', async () => {
+    test('CASE_6: Verify the ability to edit an existing user in Web Tables', async () => {
       await test.step('Pre-conditions', async () => {
         await test.step('Create test user', async () => {
           await registrationFormPage.makeUser(userData)
@@ -443,7 +443,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step(`Check that user Email in table is ${spareUserData.email}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(spareUserData.email, 'email')
-        cellContent != null ? expect(cellContent).toBe(spareUserData.email) : process.exit(1)
+        expect(cellContent).toBe(spareUserData.email)
       })
       await test.step('Click "Edit" button of test user', async () => {
         await webTablesPage.clickEditUserButton(spareUserData.email)
@@ -459,7 +459,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step(`Check that user Age in table is ${spareUserData.age}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(spareUserData.email, 'age')
-        cellContent != null ? expect(cellContent).toBe(spareUserData.age) : process.exit(1)
+        expect(cellContent).toBe(spareUserData.age)
       })
       await test.step('Click "Edit" button of test user', async () => {
         await webTablesPage.clickEditUserButton(spareUserData.email)
@@ -475,7 +475,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step(`Check that user Email in table is ${spareUserData.salary}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(spareUserData.email, 'salary')
-        cellContent != null ? expect(cellContent).toBe(spareUserData.salary) : process.exit(1)
+        expect(cellContent).toBe(spareUserData.salary)
       })
       await test.step('Click "Edit" button of test user', async () => {
         await webTablesPage.clickEditUserButton(spareUserData.email)
@@ -491,7 +491,7 @@ test.describe('Check functionality of WebTables page', () => {
       })
       await test.step(`Check that user Department in table is ${spareUserData.department}`, async () => {
         const cellContent: string | null = await webTablesPage.checkTextContentOfTableCellByCellName(spareUserData.email, 'department')
-        cellContent != null ? expect(cellContent).toBe(spareUserData.department) : process.exit(1)
+        expect(cellContent).toBe(spareUserData.department)
       })
       await test.step('Delete created user', async () => {
         await webTablesPage.deleteUserButtonClick(spareUserData.email)
@@ -500,7 +500,7 @@ test.describe('Check functionality of WebTables page', () => {
         await webTablesPage.isUserAppearsInWebTable(userData.email, false)
       })
     })
-    test('CASE_7: Check the functionality of protection against unwanted closing of the registration form', async () => {
+    test('CASE_7: Verify protection against accidental closure of the Registration Form', async () => {
       await test.step('Click "Add" button', async () => {
         await webTablesPage.clickAddButton()
       })

@@ -113,7 +113,7 @@ export default class RegistrationFormPage {
     return await this.header.isVisible()
   }
 
-  async checkForInputError (expectedColor: 'successColor' | 'errorColor', currentField: Locator): Promise<void> {
+  async checkInputValidationState (expectedColor: 'successColor' | 'errorColor', currentField: Locator): Promise<void> {
     const color: string = expectedColor === 'errorColor' ? this.errorColor : this.successColor
     await expect(currentField).toHaveCSS('border-color', color)
   }

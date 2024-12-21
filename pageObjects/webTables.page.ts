@@ -51,7 +51,7 @@ export default class WebTablesPage {
     await deleteUserButton.click()
   }
 
-  async searchInputFill (userEmail: string): Promise<void> {
+  async enterSearchData (userEmail: string): Promise<void> {
     await this.searchInput.fill(userEmail)
   }
 
