@@ -1,6 +1,6 @@
 {
   "name": "toautotestandback",
-  "version": "1.9.2",
+  "version": "1.10.0",
   "main": "index.js",
   "scripts": {
     "lint": "ts-standard",
