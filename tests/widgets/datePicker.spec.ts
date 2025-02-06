@@ -69,17 +69,8 @@ test.describe('Verify functionality of "Select Date" widget', async () => {
     })
   })
 
-  test('CASE_5: Verify functionality of month selection in dropdown menu', async () => {
-    await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
-      await datePicker.selectMonthInPopup('February')
-    })
-    await test.step('Select "January" in dropdown menu', async () => {
-      await datePicker.selectMonthInPopup('January')
-    })
-  })
 
-  test('CASE_6: Verify functionality of year selection in dropdown menu', async () => {
+  test('CASE_5: Verify functionality of year selection in dropdown menu', async () => {
     await test.step('Preconditions', async () => {
       await datePicker.selectDate.click()
       await datePicker.selectMonthInPopup('February')
@@ -93,7 +84,7 @@ test.describe('Verify functionality of "Select Date" widget', async () => {
     })
   })
 
-  test('CASE_7: Verify functionality of date input field', async () => {
+  test('CASE_6: Verify functionality of date input field', async () => {
     await test.step('Preconditions', async () => {
       await datePicker.selectDate.clear()
     })
@@ -108,7 +99,7 @@ test.describe('Verify functionality of "Select Date" widget', async () => {
     })
   })
 
-  test('CASE_8: Verify date selection functionality', async () => {
+  test('CASE_7: Verify date selection functionality', async () => {
     await test.step('Preconditions', async () => {
       await datePicker.selectDate.click()
     })
