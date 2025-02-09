@@ -55,6 +55,9 @@ Project structure:
 └── workflows/
     └── playwright.yml
 
+interfaces/
+└──datePicker.t.ts
+
 node_modules/
 
 pageObjects/

@@ -3,11 +3,13 @@ import MainPage from '../../pageObjects/main.page'
 import NavigationBar from '../../Utils/Components/navigationBar.page'
 import { removeMainAds, removeSideAds } from '../../Utils/functions'
 import DatePicker from '../../Utils/Components/datePicker.page'
+import { IDatePicker } from '../../interfaces/datePicker.t'
+import { timeOptions } from '../../Utils/types'
 
-test.describe('Verify functionality of "Select Date" widget', async () => {
+test.describe('Verify functionality of "Select Date" widget', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
-  let datePicker: DatePicker
+  let datePicker: IDatePicker
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
@@ -28,90 +30,120 @@ test.describe('Verify functionality of "Select Date" widget', async () => {
   })
 
   test('CASE_2: Verify functionality of month selection in dropdown menu', async () => {
+    const initialMonth: string = 'February'
+    const secondMonth: string = 'January'
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
-      await datePicker.selectMonthInPopup('February')
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
+      await test.step(`Select ${initialMonth} in months dropdown menu`, async () => {
+        await datePicker.selectMonthInDropdown(initialMonth)
+      })
     })
-    await test.step('Select "January" in dropdown menu', async () => {
-      await datePicker.selectMonthInPopup('January')
+    await test.step(`Select ${secondMonth} in dropdown menu`, async () => {
+      await datePicker.selectMonthInDropdown(secondMonth)
     })
-    await test.step('Check that month in widgets header is "January"', async () => {
+    await test.step(`Check that month in widgets header is ${secondMonth}`, async () => {
       const currentMonthInHeader: string = await datePicker.getCurrentMonthFromDatepickersHeader()
-      expect(currentMonthInHeader).toEqual('January')
+      expect(currentMonthInHeader).toEqual(secondMonth)
     })
   })
 
   test('CASE_3: Verify "Previous month" button functionality', async () => {
+    const initialMonth: string = 'March'
+    const expectedPreviousMonth: string = 'February'
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
-      await datePicker.selectMonthInPopup('February')
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
+      await test.step(`Select ${initialMonth} in months dropdown menu`, async () => {
+        await datePicker.selectMonthInDropdown(initialMonth)
+      })
     })
-    await test.step(' Click "Previous month" button', async () => {
-      await datePicker.previousMonthButton.click()
+    await test.step('Click "Previous month" button', async () => {
+      await datePicker.clickPreviousMonthButton()
     })
-    await test.step('Check that month in widgets header is "January"', async () => {
+    await test.step(`Check that month in widgets header is ${expectedPreviousMonth}`, async () => {
       const currentMonthInHeader: string = await datePicker.getCurrentMonthFromDatepickersHeader()
-      expect(currentMonthInHeader).toEqual('January')
+      expect(currentMonthInHeader).toEqual(expectedPreviousMonth)
     })
   })
 
   test('CASE_4: Verify "Next month" button functionality', async () => {
+    const initialMonth: string = 'February'
+    const expectedNextMonth: string = 'March'
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
-      await datePicker.selectMonthInPopup('February')
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
+      await test.step(`Select ${initialMonth} in months dropdown menu`, async () => {
+        await datePicker.selectMonthInDropdown(initialMonth)
+      })
     })
-    await test.step(' Click "Previous month" button', async () => {
-      await datePicker.nextMonthButton.click()
+    await test.step('Click "Next month" button', async () => {
+      await datePicker.clickNextMonthButton()
     })
-    await test.step('Check that month in widgets header is "January"', async () => {
+    await test.step(`Check that month in widgets header is ${expectedNextMonth}`, async () => {
       const currentMonthInHeader: string = await datePicker.getCurrentMonthFromDatepickersHeader()
-      expect(currentMonthInHeader).toEqual('March')
+      expect(currentMonthInHeader).toEqual(expectedNextMonth)
     })
   })
 
-
   test('CASE_5: Verify functionality of year selection in dropdown menu', async () => {
+    const expectedYear: string = '2022'
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
-      await datePicker.selectMonthInPopup('February')
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
     })
-    await test.step('Select 2022 year in years dropdown menu', async () => {
-      await datePicker.selectYearInPopup('2022')
+    await test.step(`Select ${expectedYear} year in years dropdown menu`, async () => {
+      await datePicker.selectYearInDropdown(expectedYear)
     })
-    await test.step('Check that year in widgets header is "2022"', async () => {
+    await test.step(`Check that year in widgets header is ${expectedYear}`, async () => {
       const currentYearInHeader: string = await datePicker.getCurrentYearFromDatepickersHeader()
-      expect(currentYearInHeader).toEqual('2022')
+      expect(currentYearInHeader).toEqual(expectedYear)
     })
   })
 
   test('CASE_6: Verify functionality of date input field', async () => {
+    const date: string = 'July 8, 2025'
+    const formatedDate: string = await datePicker.getFormatedDate(date)
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.clear()
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
+      await test.step('Clear input field', async () => {
+        await datePicker.clearSelectDateInputField()
+      })
     })
-    await test.step('Fill field with "02 02 2022"', async () => {
-      await datePicker.selectDate.fill('02 02 2022')
+    await test.step(`Fill field with ${date}`, async () => {
+      await datePicker.fillDateInputField(date)
     })
     await test.step('Click "Escape" button on keyboard', async () => {
       await datePicker.clickEscapeKeyboardButton()
     })
-    await test.step('Verify that date in input field is "02/02/2022"', async () => {
-      await datePicker.isChoosedDateInInputCorrect('02', '02', '2022')
+    await test.step(`Verify that date in input field is ${date}`, async () => {
+      await datePicker.isChosenDateInInputCorrect(formatedDate)
     })
   })
 
   test('CASE_7: Verify date selection functionality', async () => {
+    const date: string = 'April 26, 2044'
+    const formatedDate: string = await datePicker.getFormatedDate(date)
     await test.step('Preconditions', async () => {
-      await datePicker.selectDate.click()
+      await test.step('Click on "Select Date" input field', async () => {
+        await datePicker.clickOnSelectDateInputField()
+      })
     })
-    await test.step('Select "February", "2022" in dropdown windows and click on "22" day in calendar', async () => {
-      await datePicker.selectDateInCalendar('February', '12', '2022')
+    await test.step(`Select ${date} in the calendar`, async () => {
+      await datePicker.selectDateInCalendar(date)
     })
-    await test.step('Verify that date in input field is "02/02/2022"', async () => {
-      await datePicker.isChoosedDateInInputCorrect('02', '12', '2022')
+    await test.step(`Verify that date in input field is ${formatedDate}`, async () => {
+      await datePicker.isChosenDateInInputCorrect(formatedDate)
     })
   })
 
-  test.describe('Verify functionality of "Date And Time" widget', async (): Promise<void> => {
+  test.describe('Verify functionality of "Date And Time" widget', () => {
     test('CASE_1: Verify default date on page', async () => {
       await test.step('Compare the current date on your computer with the date in the widget', async () => {
         await datePicker.isDefaultDateAndTimeCorrect()
@@ -119,98 +151,134 @@ test.describe('Verify functionality of "Select Date" widget', async () => {
     })
 
     test('CASE_2: Verify functionality of month selection in widgets list', async () => {
+      const initialMonth: string = 'May'
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
+        await test.step('Click on months menu in widget', async () => {
+          await datePicker.clickOnCurrentVisibleMonthInMenu()
+        })
       })
-      await test.step('Click on "February" in list', async () => {
-        await datePicker.clickOnMonthInList('February')
+      await test.step(`Click on ${initialMonth} in list`, async () => {
+        await datePicker.clickOnMonthInList(initialMonth)
       })
-      await test.step('Verify that month in widgets list and header changed to "February"', async () => {
-        await datePicker.isChoosedMonthInListCorrect('February')
+      await test.step(`Verify that month in widgets list and header changed to ${initialMonth}`, async () => {
+        await datePicker.isChosenMonthInListCorrect(initialMonth)
       })
     })
 
     test('CASE_3: Verify functionality of year selection in widgets list', async () => {
+      const initialYear: string = '2027'
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
+        await test.step('Click on years menu in widget', async () => {
+          await datePicker.clickOnCurrentVisibleYearInMenu()
+        })
       })
-      await test.step('Click on "2022" in list', async () => {
-        await datePicker.clickOnYearInList('2022')
+      await test.step(`Click on ${initialYear} in list`, async () => {
+        await datePicker.clickOnYearInList(initialYear)
       })
-      await test.step('Verify that year in widgets list and header changed to "2022"', async () => {
-        await datePicker.isChoosedYearInListCorrect('2022')
+      await test.step(`Verify that year in widgets list and header changed to ${initialYear}`, async () => {
+        await datePicker.isChosenYearInListCorrect(initialYear)
       })
     })
 
     test('CASE_4: Verify functionality of "upcoming" button in years list', async () => {
-      const initialFirstYearInLIst: string = await datePicker.getFirstYearInList()
+      let initialFirstYearInLIst: string = ''
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
-        await datePicker.currentVisibleYearInMenu.click()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
+        await test.step('Click on years menu in widget', async () => {
+          await datePicker.clickOnCurrentVisibleYearInMenu()
+        })
+        await test.step('Save current visible first year in list', async () => {
+          initialFirstYearInLIst = await datePicker.getFirstYearInList()
+        })
       })
       await test.step('Click on "upcoming" button', async () => {
         await datePicker.clickOnUpcomingButton()
       })
-      await test.step('Verify that current first year in the list is different from the saved one', async () => {
-        const currentFirstYearInList: string = await datePicker.firstYearInList.textContent() as string
-        expect(initialFirstYearInLIst).not.toBe(currentFirstYearInList)
+      await test.step('Verify that current first year in the list is greater than the saved one', async () => {
+        const currentFirstYearInList: string = await datePicker.getFirstYearInList()
+        expect(Number(currentFirstYearInList)).toBeGreaterThan(Number(initialFirstYearInLIst))
       })
     })
 
     test('CASE_5: Verify functionality of "past" button in years list', async () => {
-      const initialFirstYearInLIst: string = await datePicker.getFirstYearInList()
+      let initialFirstYearInLIst: string = ''
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
-        await datePicker.currentVisibleYearInMenu.click()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
+        await test.step('Click on years menu in widget', async () => {
+          await datePicker.clickOnCurrentVisibleYearInMenu()
+        })
+        await test.step('Save current visible first year in list', async () => {
+          initialFirstYearInLIst = await datePicker.getFirstYearInList()
+        })
       })
       await test.step('Click on "past" button', async () => {
         await datePicker.clickPastButton()
       })
-      await test.step('Verify that current first year in the list is different from the saved one', async () => {
-        const currentFirstYearInList: string = await datePicker.firstYearInList.textContent() as string
-        expect(initialFirstYearInLIst).not.toBe(currentFirstYearInList)
+      await test.step('Verify that current first year in the list is less than the saved one', async () => {
+        const currentFirstYearInList: string = await datePicker.getFirstYearInList()
+        expect(Number(currentFirstYearInList)).toBeLessThan(Number(initialFirstYearInLIst))
       })
     })
 
     test('CASE_6: Verify functionality of time selection list', async () => {
+      const time: timeOptions = '18:15'
+      const formattedTime = await datePicker.getFormatedTime(time)
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
       })
-      await test.step('Click on "8:15" in "time" list', async () => {
-        await datePicker.clickOnTimeInList('08:15')
+      await test.step(`Click on ${time} in "time" list`, async () => {
+        await datePicker.clickOnTimeInList(time)
       })
-      await test.step('Verify that time in input field is "8:15 AM"', async () => {
+      await test.step(`Verify that date in input field includes ${formattedTime}`, async () => {
         const currentTime: string = await datePicker.getCurrentTime()
-        expect(currentTime).toBe('8:15 AM')
+        expect(currentTime).toBe(formattedTime)
       })
     })
 
     test('CASE_7: Verify functionality of date input field', async () => {
+      const date: string = 'February 2, 2022'
+      const time: timeOptions = '00:00'
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.clear()
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
+        })
       })
-      await test.step('Fill field with "February 2 2022 8:15"', async () => {
-        await datePicker.fillDateInputField('February', '2', '2022', '08:15')
+      await test.step(`Fill field with ${date} ${time}`, async () => {
+        await datePicker.fillDateInputField(date, time)
       })
       await test.step('Click "Escape" button', async () => {
         await datePicker.clickEscapeKeyboardButton()
       })
-      await test.step('Verify that time in input field is February 2, 2022 8:15 AM', async () => {
-        await datePicker.isChoosedDateInInputCorrect('February', '2', '2022', '8:15')
+      await test.step(`Verify that time in input field is ${date} ${time}`, async () => {
+        await datePicker.isChosenDateInInputCorrect(date, time)
       })
     })
 
     test('CASE_8: Verify date selection functionality', async () => {
+      const date: string = 'March 4, 2012'
+      const time: timeOptions = '08:15'
       await test.step('Preconditions', async () => {
-        await datePicker.selectDateAndTime.click()
-      })
-      await test.step(
-        'Click on "February" from the months list in the widget, then on "2022" from the years list, then on "22" day in calendar, then on "8:15" in time list',
-        async () => {
-          await datePicker.selectDateInCalendar('February', '2', '2022', '08:15')
+        await test.step('Click on "Date And Time" input field', async () => {
+          await datePicker.clickOnDateAndTimeInputField()
         })
-      await test.step('Verify that time in input field is "February 2, 2022 8:15 AM"', async () => {
-        await datePicker.isChoosedDateInInputCorrect('February', '2', '2022', '8:15')
+      })
+      await test.step(`Select ${date} in the calendar and choose ${time}`, async () => {
+        await datePicker.selectDateInCalendar(date, time)
+      })
+      await test.step(`Verify that time in input field is ${date} ${time}`, async () => {
+        await datePicker.isChosenDateInInputCorrect(date, time)
       })
     })
   })
