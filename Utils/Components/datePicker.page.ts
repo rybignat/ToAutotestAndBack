@@ -38,8 +38,8 @@ export default class DatePicker implements IDatePicker {
     await this.monthDropdown.selectOption(`${this.monthsArray.indexOf(month)}`)
   }
 
-  async selectYearInDropdown (year: string): Promise<void> {
-    await this.yearDropdown.selectOption(year)
+  async selectYearInDropdown (year: number): Promise<void> {
+    await this.yearDropdown.selectOption(year.toString())
   }
 
   async selectDateInCalendar (date: string, timeOptions?: timeOptions): Promise<void> {
@@ -50,12 +50,12 @@ export default class DatePicker implements IDatePicker {
       await this.clickOnCurrentVisibleMonthInMenu()
       await this.clickOnMonthInList(filteredDateArray[0])
       await this.makeYearVisibleInList(filteredDateArray[2])
-      await this.clickOnYearInList(filteredDateArray[2])
+      await this.clickOnYearInList(Number(filteredDateArray[2]))
       await dayInCalendarLocator[position]().click()
       await this.clickOnTimeInList(timeOptions)
     } else {
       await this.selectMonthInDropdown(filteredDateArray[0])
-      await this.selectYearInDropdown(filteredDateArray[2])
+      await this.selectYearInDropdown(Number(filteredDateArray[2]))
       await dayInCalendarLocator[position]().click()
     }
   }
@@ -109,7 +109,7 @@ export default class DatePicker implements IDatePicker {
     await monthLocator.click()
   }
 
-  async clickOnYearInList (year: string): Promise<void> {
+  async clickOnYearInList (year: number): Promise<void> {
     const yearLocator: Locator = this.page.locator(`//div[@class="react-datepicker__year-dropdown"]/div[text()="${year}"]`)
     await yearLocator.click()
   }
@@ -127,11 +127,6 @@ export default class DatePicker implements IDatePicker {
     await this.dateAndTimeInputField.click()
   }
 
-  async getCurrentTime (): Promise<string> {
-    const inputValue: string = await this.dateAndTimeInputField.getAttribute('value') as string
-    return inputValue.split(' ')[3] + ' ' + inputValue.split(' ')[4]
-  }
-
   async getFormatedTime (time: timeOptions): Promise<string> {
     const timeArray: string[] = time.split(':')
     const timePeriod: 'AM' | 'PM' = Number(timeArray[0]) >= 12 ? 'PM' : 'AM'
@@ -139,8 +134,13 @@ export default class DatePicker implements IDatePicker {
     return `${timeArray.join(':')} ${timePeriod}`
   }
 
-  async getFirstYearInList (): Promise<string> {
-    return await this.firstYearInList.textContent() as string
+  async getFirstYearInList (): Promise<number> {
+    return Number(await this.firstYearInList.textContent())
+  }
+
+  async getTimeFromInput (): Promise<string> {
+    const inputValue: string = await this.dateAndTimeInputField.getAttribute('value') as string
+    return inputValue.split(' ')[3] + ' ' + inputValue.split(' ')[4]
   }
 
   async getCurrentMonthFromDatepickersHeader (): Promise<string> {
@@ -165,6 +165,20 @@ export default class DatePicker implements IDatePicker {
     return `${date} ${time} ${Number(time) > 12 ? 'PM' : 'AM'}`
   }
 
+  getFormattedLocalDate (): string {
+    const localDate = new Date()
+    const [month, day, year] = [
+      String(localDate.getMonth() + 1).padStart(2, '0'),
+      String(localDate.getDate()).padStart(2, '0'),
+      localDate.getFullYear()
+    ]
+    return `${month}/${day}/${year}`
+  }
+
+  async getDisplayedDate (): Promise<string> {
+    return await this.dateInputField.inputValue()
+  }
+
   async makeYearVisibleInList (year: string): Promise<void> {
     const currentLocalYear = new Date().getFullYear()
     const yearsDifference: number = currentLocalYear - Number(year)
@@ -177,15 +191,8 @@ export default class DatePicker implements IDatePicker {
     }
   }
 
-  async isDefaultDateCorrect (): Promise<void> {
-    const localDate = new Date()
-    const [month, day, year] = [
-      localDate.getMonth(),
-      String(localDate.getDate()).padStart(2, '0'),
-      localDate.getFullYear()
-    ]
-    const webDateLocator: Locator = this.page.locator(`//input[@value="0${month + 1}/${day}/${year}"]`)
-    await expect(webDateLocator).toBeVisible()
+  async verifyDefaultDate (expectedDate: string, displayedDate: string): Promise<void> {
+    expect(displayedDate).toBe(expectedDate)
   }
 
   async isDefaultDateAndTimeCorrect (): Promise<void> {
@@ -212,13 +219,28 @@ export default class DatePicker implements IDatePicker {
     }
   }
 
-  async isChosenMonthInListCorrect (month: string): Promise<void> {
-    const currentMonthText = await this.currentVisibleMonthInMenu.textContent() as string
-    expect(currentMonthText).toBe(month)
+  async isTimeInInputFieldCorrect (formattedTime: string): Promise<void> {
+    expect(await this.getTimeFromInput()).toBe(formattedTime)
   }
 
-  async isChosenYearInListCorrect (year: string): Promise<void> {
-    const currentYearText = await this.currentVisibleYearInMenu.textContent() as string
-    expect(currentYearText).toBe(year)
+  async isMonthInHeaderCorrect (expectedMonth: string): Promise<void> {
+    expect(await this.getCurrentMonthFromDatepickersHeader()).toBe(expectedMonth)
+  }
+
+  async isYearInHeaderCorrect (expectedYear: number): Promise<void> {
+    expect(await this.getCurrentYearFromDatepickersHeader()).toBe(expectedYear.toString())
+  }
+
+  async isChosenMonthInListCorrect (month: string): Promise<void> {
+    expect(await this.currentVisibleMonthInMenu.textContent()).toBe(month)
+  }
+
+  async isChosenYearInListCorrect (year: number): Promise<void> {
+    expect(await this.currentVisibleYearInMenu.textContent()).toBe(year.toString())
+  }
+
+  async isYearDifferent (currentYear: number, initialYear: number, state: 'Upcoming' | 'Past'): Promise<void> {
+    const matcher = state === 'Upcoming' ? 'toBeGreaterThan' : 'toBeLessThan'
+    expect(currentYear)[matcher](initialYear)
   }
 }
