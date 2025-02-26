@@ -32,7 +32,7 @@ test.describe('Verify functionality of "Select Date" widget', () => {
         console.log(`Expected Date: ${expectedDate}`)
       })
       await test.step('Get the displayed date from the widget', async () => {
-        displayedDate = await datePicker.getDisplayedDate()
+        displayedDate = await datePicker.getDisplayedDate('Date')
         console.log(`Displayed Date: ${displayedDate}`)
       })
     })
@@ -130,7 +130,7 @@ test.describe('Verify functionality of "Select Date" widget', () => {
     await test.step('Click "Escape" button on keyboard', async () => {
       await datePicker.clickEscapeKeyboardButton()
     })
-    await test.step(`Verify that date in input field is ${date}`, async () => {
+    await test.step(`Verify that date in input field is ${formatedDate}`, async () => {
       await datePicker.isChosenDateInInputCorrect(formatedDate)
     })
   })
@@ -153,13 +153,23 @@ test.describe('Verify functionality of "Select Date" widget', () => {
 
   test.describe('Verify functionality of "Date And Time" widget', () => {
     test('CASE_1: Verify default date on page', async () => {
-      await test.step('Compare the current date on your computer with the date in the widget', async () => {
-        await datePicker.isDefaultDateAndTimeCorrect()
+      let expectedDate: string = ''
+      let displayedDate: string = ''
+      await test.step('Preconditions', async () => {
+        await test.step('Get the expected default date format', async () => {
+          expectedDate = datePicker.getFormattedLocalDateAndTime()
+        })
+        await test.step('Get the displayed date from the widget', async () => {
+          displayedDate = await datePicker.getDisplayedDate('Date and Time')
+        })
+      })
+      await test.step(`Compare the ${expectedDate} and ${displayedDate} dates`, async () => {
+        await datePicker.verifyDefaultDate(expectedDate, displayedDate)
       })
     })
 
     test('CASE_2: Verify functionality of month selection in widgets list', async () => {
-      const initialMonth: string = 'May'
+      const expectedMonth: string = 'May'
       await test.step('Preconditions', async () => {
         await test.step('Click on "Date And Time" input field', async () => {
           await datePicker.clickOnDateAndTimeInputField()
@@ -168,16 +178,16 @@ test.describe('Verify functionality of "Select Date" widget', () => {
           await datePicker.clickOnCurrentVisibleMonthInMenu()
         })
       })
-      await test.step(`Click on ${initialMonth} in list`, async () => {
-        await datePicker.clickOnMonthInList(initialMonth)
+      await test.step(`Click on ${expectedMonth} in list`, async () => {
+        await datePicker.clickOnMonthInList(expectedMonth)
       })
-      await test.step(`Verify that month in widgets list and header changed to ${initialMonth}`, async () => {
-        await datePicker.isChosenMonthInListCorrect(initialMonth)
+      await test.step(`Verify that month in widgets list and header changed to ${expectedMonth}`, async () => {
+        await datePicker.isChosenMonthInListCorrect(expectedMonth)
       })
     })
 
     test('CASE_3: Verify functionality of year selection in widgets list', async () => {
-      const initialYear: number = 2027
+      const expectedYear: number = 2027
       await test.step('Preconditions', async () => {
         await test.step('Click on "Date And Time" input field', async () => {
           await datePicker.clickOnDateAndTimeInputField()
@@ -186,11 +196,11 @@ test.describe('Verify functionality of "Select Date" widget', () => {
           await datePicker.clickOnCurrentVisibleYearInMenu()
         })
       })
-      await test.step(`Click on ${initialYear} in list`, async () => {
-        await datePicker.clickOnYearInList(initialYear)
+      await test.step(`Click on ${expectedYear} in list`, async () => {
+        await datePicker.clickOnYearInList(expectedYear)
       })
-      await test.step(`Verify that year in widgets list and header changed to ${initialYear}`, async () => {
-        await datePicker.isChosenYearInListCorrect(initialYear)
+      await test.step(`Verify that year in widgets list and header changed to ${expectedYear}`, async () => {
+        await datePicker.isChosenYearInListCorrect(expectedYear)
       })
     })
 

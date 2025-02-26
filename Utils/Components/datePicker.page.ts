@@ -49,7 +49,7 @@ export default class DatePicker implements IDatePicker {
     if (timeOptions !== undefined) {
       await this.clickOnCurrentVisibleMonthInMenu()
       await this.clickOnMonthInList(filteredDateArray[0])
-      await this.makeYearVisibleInList(filteredDateArray[2])
+      await this.scrollToYearInList(filteredDateArray[2])
       await this.clickOnYearInList(Number(filteredDateArray[2]))
       await dayInCalendarLocator[position]().click()
       await this.clickOnTimeInList(timeOptions)
@@ -139,8 +139,10 @@ export default class DatePicker implements IDatePicker {
   }
 
   async getTimeFromInput (): Promise<string> {
-    const inputValue: string = await this.dateAndTimeInputField.getAttribute('value') as string
-    return inputValue.split(' ')[3] + ' ' + inputValue.split(' ')[4]
+    const inputValue: string | null = await this.dateAndTimeInputField.getAttribute('value') as string
+    const inputParts = inputValue.split(' ')
+    const [time, period] = [inputParts[3], inputParts[4]]
+    return `${time} ${period}`
   }
 
   async getCurrentMonthFromDatepickersHeader (): Promise<string> {
@@ -175,11 +177,27 @@ export default class DatePicker implements IDatePicker {
     return `${month}/${day}/${year}`
   }
 
-  async getDisplayedDate (): Promise<string> {
-    return await this.dateInputField.inputValue()
+  getFormattedLocalDateAndTime (): string {
+    const localDate = new Intl.DateTimeFormat('en-US', {
+      dateStyle: 'long',
+      timeStyle: 'short',
+      hour12: true
+    }).format(new Date())
+    return localDate.replace('at ', '')
   }
 
-  async makeYearVisibleInList (year: string): Promise<void> {
+  async getDisplayedDate (dateType: 'Date' | 'Date and Time'): Promise<string> {
+    let inputValue: string = ''
+    if (dateType === 'Date') {
+      inputValue = await this.dateInputField.getAttribute('value') as string
+    }
+    if (dateType === 'Date and Time') {
+      inputValue = await this.dateAndTimeInputField.getAttribute('value') as string
+    }
+    return inputValue
+  }
+
+  async scrollToYearInList (year: string): Promise<void> {
     const currentLocalYear = new Date().getFullYear()
     const yearsDifference: number = currentLocalYear - Number(year)
     await this.currentVisibleYearInMenu.click()
@@ -193,19 +211,6 @@ export default class DatePicker implements IDatePicker {
 
   async verifyDefaultDate (expectedDate: string, displayedDate: string): Promise<void> {
     expect(displayedDate).toBe(expectedDate)
-  }
-
-  async isDefaultDateAndTimeCorrect (): Promise<void> {
-    const dateInputValue: string | null = await this.dateAndTimeInputField.getAttribute('value')
-    const localDate = new Intl.DateTimeFormat('en-US', {
-      dateStyle: 'long',
-      timeStyle: 'short',
-      hour12: true
-    }).format(new Date())
-    if (dateInputValue === null || dateInputValue === undefined) {
-      throw new Error('Missing attribute value for element')
-    }
-    expect(dateInputValue).toBe(localDate.replace('at ', ''))
   }
 
   async isChosenDateInInputCorrect (date: string, time?: timeOptions): Promise<void> {

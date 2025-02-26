@@ -26,11 +26,11 @@ export interface IDatePicker {
   getCurrentYearFromDatepickersHeader: () => Promise<string>
   getFormatedDate: (date: string, time?: timeOptions) => Promise<string>
   getFormattedLocalDate: () => string
-  getDisplayedDate: () => Promise<string>
+  getFormattedLocalDateAndTime: () => string
+  getDisplayedDate: (dateType: 'Date' | 'Date and Time') => Promise<string>
   verifyDefaultDate: (expectedDate: string, displayedDate: string) => Promise<void>
-  makeYearVisibleInList: (year: string) => Promise<void>
+  scrollToYearInList: (year: string) => Promise<void>
   isTimeInInputFieldCorrect: (formattedTime: string) => Promise<void>
-  isDefaultDateAndTimeCorrect: () => Promise<void>
   isMonthInHeaderCorrect: (expectedMonth: string) => Promise<void>
   isYearDifferent: (currentYear: number, initialYear: number, state: 'Upcoming' | 'Past') => Promise<void>
   isYearInHeaderCorrect: (expectedYear: number) => Promise<void>
