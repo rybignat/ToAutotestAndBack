@@ -55,6 +55,9 @@ Project structure:
 └── workflows/
     └── playwright.yml
 
+interfaces/
+└──datePicker.t.ts
+
 node_modules/
 
 pageObjects/
@@ -73,6 +76,8 @@ pageObjects/
 test-results/
 
 tests/
+├──widgets/
+    └──datePicker.spec.ts
 ├──brokenlinks_images.spec.ts
 ├──buttons.spec.ts
 ├──checkBox.spec.ts
@@ -85,6 +90,7 @@ tests/
 
 Utils/
 ├──Components/
+    ├──datePicker.page.ts
 |   ├──navigationBar.page.ts
 |   └──registrationForm.page.ts
 ├──Uploads
@@ -108,5 +114,5 @@ Main files and folders:
 - **Utils/Components**: Contains application components.
 - **Utils/Uploads**: Contains samples for tests.
 - **pageObjects/main.page.js**: An example of a page organized according to the Page Object Model.
-- **Utils/**: Utility functions, such as `functions.js` or `customReporter.js`.
+- **Utils/**: Utility functions, such as `functions.ts` or `customReporter.ts`.
 - **.github/workflows/playwright.yml**: CI configuration to run tests automatically.
