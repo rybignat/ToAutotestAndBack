@@ -6,6 +6,7 @@ import NavigationBar from '.././Utils/Components/navigationBar.page'
 import { removeMainAds, removeSideAds, env } from '../Utils/functions'
 import WebTablesPage from '../pageObjects/webTables.page'
 
+
 test.describe('Check functionality of WebTables page', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
