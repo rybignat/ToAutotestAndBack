@@ -1,11 +1,12 @@
 {
   "name": "toautotestandback",
-  "version": "1.10.3",
+  "version": "1.11.1",
   "main": "index.js",
   "scripts": {
     "lint": "ts-standard",
     "lint-fix": "npx ts-standard --fix",
-    "tests": "npx playwright test"
+    "tests": "npx playwright test",
+    "qase": "cross-env QASE_MODE=testops npx playwright test"
   },
   "keywords": [],
   "author": "rybignat389@gmail.com",
@@ -17,9 +18,14 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.50.0",
+    "playwright-qase-reporter": "^2.0.16",
     "standard": "^17.1.0",
     "ts-node": "^10.9.2",
     "ts-standard": "^12.0.2",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7"
   }
 }
