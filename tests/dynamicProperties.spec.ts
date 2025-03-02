@@ -25,7 +25,7 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
     await removeSideAds(page)
   })
 
-  test('CASE_1: Check that "This text has random id" have random id', async ({}, testInfo) => {
+  test('CASE_1: Check that "This text has random id" have random id', async ({}, testInfo) => { // eslint-disable-line
     let firstId: string
     let secondId: string
     const page = (testInfo as any).updatedPage

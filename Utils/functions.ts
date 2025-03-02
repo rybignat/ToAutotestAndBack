@@ -29,12 +29,12 @@ export async function scrollToElement (page: Page, elementLocator: string): Prom
   }
 }
 
-export function env(name: string): string {
-  const value = process.env[name];
+export function env (name: string): string {
+  const value = process.env[name]
 
-  if (!value) {
-    throw new Error(`Missing: process.env['${name}'].`);
+  if (value === undefined) {
+    throw new Error(`Missing: process.env['${name}'].`)
   }
 
-  return value;
+  return value
 }

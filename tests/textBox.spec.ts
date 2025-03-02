@@ -4,7 +4,6 @@ import MainPage from '../pageObjects/main.page'
 import NavigationBar from '.././Utils/Components/navigationBar.page'
 import { env } from '../Utils/functions'
 
-
 test.describe('Testing functionality of "Text Box" page', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar

@@ -10,7 +10,7 @@ export default class MainPage {
   async navigateToMainPage (): Promise<Page> {
     let attempts = 5
     while (attempts-- > 0) {
-      const response = await this.page.goto('https://the-internet.herokuapp.com/status_codes/500', { waitUntil: 'domcontentloaded' })
+      const response = await this.page.goto('/', { waitUntil: 'domcontentloaded' })
 
       if ((response != null) && ![500, 502].includes(response.status())) {
         return this.page
@@ -21,8 +21,8 @@ export default class MainPage {
       const newResponse = await newPage.goto('https://demoqa.com', { waitUntil: 'domcontentloaded' })
 
       if ((newResponse != null) && ![500, 502].includes(newResponse.status())) {
-        await this.page.close() // Закрываем старую страницу
-        this.page = newPage // Обновляем `this.page`
+        await this.page.close()
+        this.page = newPage
         return this.page
       }
 
