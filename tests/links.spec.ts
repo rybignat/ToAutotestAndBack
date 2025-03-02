@@ -11,10 +11,13 @@ test.describe('Check the functioning of the "Links" section', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     linksPage = new LinksPage(page)
 
-    await mainPage.navigateToMainPage()
     await removeMainAds(page)
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Links')

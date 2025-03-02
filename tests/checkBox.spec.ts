@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import CheckBoxPage from '../pageObjects/checkBox.page'
 import MainPage from '../pageObjects/main.page'
 import NavigationBar from '.././Utils/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '.././Utils/functions'
+import { removeMainAds, removeSideAds } from '../Utils/functions'
 
 test.describe('Testing functionality of "Check Box" page', () => {
   let mainPage: MainPage
@@ -17,10 +17,13 @@ test.describe('Testing functionality of "Check Box" page', () => {
   const CASE_6: string[] = ['Notes', 'Commands', 'React', 'Angular', 'Veu', 'Public', 'Private', 'Classified', 'General', 'Word File.doc', 'Excel File.doc']
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     checkBoxPage = new CheckBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await removeMainAds(page)
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Check Box')
