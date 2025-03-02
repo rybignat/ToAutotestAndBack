@@ -10,10 +10,13 @@ test.describe('Check the functioning of the "Broken Links - Images" section', ()
   let brokenLinksImagesPage: BrokenLinksImagesPage
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     brokenLinksImagesPage = new BrokenLinksImagesPage(page)
 
-    await mainPage.navigateToMainPage()
     await removeMainAds(page)
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Broken Links - Images')

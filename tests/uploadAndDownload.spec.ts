@@ -10,10 +10,13 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
   let uploadAndDownloadPage: UploadAndDownloadPage
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     uploadAndDownloadPage = new UploadAndDownloadPage(page)
 
-    await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Upload and Download')
     await removeMainAds(page)
