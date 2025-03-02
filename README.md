@@ -99,6 +99,7 @@ Utils/
 ├──functions.ts
 └──types.ts
 
+.env.example
 .eslintignore
 .eslintrc.js
 .gitignore

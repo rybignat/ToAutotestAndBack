@@ -5,3 +5,6 @@ node_modules/
 /playwright/.cache/
 .idea
 TODO.txt
+sandbox.js
+sandbox2.ts
+.env
