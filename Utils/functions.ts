@@ -28,3 +28,13 @@ export async function scrollToElement (page: Page, elementLocator: string): Prom
     isVisible = await page.locator(elementLocator).isVisible()
   }
 }
+
+export function env(name: string): string {
+  const value = process.env[name];
+
+  if (!value) {
+    throw new Error(`Missing: process.env['${name}'].`);
+  }
+
+  return value;
+}

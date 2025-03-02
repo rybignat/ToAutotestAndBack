@@ -3,7 +3,7 @@ import { UserRegistration, rowsOptions } from '../Utils/types'
 import MainPage from '../pageObjects/main.page'
 import RegistrationFormPage from '../Utils/Components/registrationForm.page'
 import NavigationBar from '.././Utils/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '../Utils/functions'
+import { removeMainAds, removeSideAds, env } from '../Utils/functions'
 import WebTablesPage from '../pageObjects/webTables.page'
 
 test.describe('Check functionality of WebTables page', () => {
@@ -15,7 +15,7 @@ test.describe('Check functionality of WebTables page', () => {
   const userData: UserRegistration = {
     firstName: 'Jane',
     lastName: 'Doe',
-    email: 'janedoe@example.com',
+    email: env('TEST_EMAIL'),
     age: '21',
     salary: '30000',
     department: 'Apple'
@@ -23,18 +23,21 @@ test.describe('Check functionality of WebTables page', () => {
   const spareUserData: UserRegistration = {
     firstName: 'John',
     lastName: 'Doe',
-    email: 'johndoe@example.com',
+    email: env('SECOND_TEST_EMAIL'),
     age: '25',
     salary: '30000',
     department: 'Google'
   }
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     webTablesPage = new WebTablesPage(page)
     registrationFormPage = new RegistrationFormPage(page)
 
-    await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Web Tables')
     await removeMainAds(page)
