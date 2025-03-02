@@ -2,6 +2,7 @@ import { test } from '@playwright/test'
 import TextBox from '../pageObjects/textBox.page'
 import MainPage from '../pageObjects/main.page'
 import NavigationBar from '.././Utils/Components/navigationBar.page'
+import { env } from '../Utils/functions'
 
 test.describe('Testing functionality of "Text Box" page', () => {
   let mainPage: MainPage
@@ -9,8 +10,8 @@ test.describe('Testing functionality of "Text Box" page', () => {
   let textBoxPage: TextBox
 
   const defaultUser = {
-    name: 'Ilya de Gay le Pidorr',
-    email: 'ilyao4koshnik@anal.com',
+    name: 'John Doe',
+    email: env('TEST_EMAIL'),
     currentAddress: 'Nexdoor str.',
     permanentAddress: 'Kanava deadend',
     invalidEmail: 'test'
@@ -18,10 +19,13 @@ test.describe('Testing functionality of "Text Box" page', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     textBoxPage = new TextBox(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Text Box')
   })

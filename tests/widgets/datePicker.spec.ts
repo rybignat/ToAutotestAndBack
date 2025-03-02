@@ -13,10 +13,13 @@ test.describe('Verify functionality of "Select Date" widget', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     datePicker = new DatePicker(page)
 
-    await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Widgets')
     await navigationBar.clickOnElementByParentAndName('Date Picker')
     await removeMainAds(page)

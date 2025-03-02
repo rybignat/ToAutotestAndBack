@@ -8,21 +8,27 @@ test.describe('Check the functioning of the "Upload and Download" section', () =
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let dynamicPropertiesPage: DynamicPropertiesPage
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }, testInfo) => {
     mainPage = new MainPage(page)
+    const newPage = await mainPage.navigateToMainPage()
+
+    if (newPage !== page) { page = newPage }
+
+    (testInfo as any).updatedPage = page
+
     navigationBar = new NavigationBar(page)
     dynamicPropertiesPage = new DynamicPropertiesPage(page)
 
-    await mainPage.navigateToMainPage()
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Dynamic Properties')
     await removeMainAds(page)
     await removeSideAds(page)
   })
 
-  test('CASE_1: Check that "This text has random id" have random id', async ({ page }) => {
+  test('CASE_1: Check that "This text has random id" have random id', async ({}, testInfo) => { // eslint-disable-line
     let firstId: string
     let secondId: string
+    const page = (testInfo as any).updatedPage
 
     await test.step('Get id of text and save it in variable firstId', async () => {
       firstId = await dynamicPropertiesPage.getIdFromElement()

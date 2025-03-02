@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import RadioButtonPage from '../pageObjects/radioButton.page'
 import MainPage from '../pageObjects/main.page'
 import NavigationBar from '.././Utils/Components/navigationBar.page'
-import { removeMainAds, removeSideAds } from '.././Utils/functions'
+import { removeMainAds, removeSideAds } from '../Utils/functions'
 
 test.describe('Check the functioning of the "Radio Button" section', () => {
   let mainPage: MainPage
@@ -11,10 +11,13 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     radioButtonPage = new RadioButtonPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await removeMainAds(page)
     await mainPage.clickElementsOnMainPageByName('Elements')
     await navigationBar.clickOnElementByParentAndName('Radio Button')
