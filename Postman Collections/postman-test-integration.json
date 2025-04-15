@@ -119,13 +119,7 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Basic cG9zdG1hbjpwYXNzd29yZA==",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": "{{BASE_URL}}/basic-auth"
 			},
 			"response": []
@@ -243,7 +237,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "a98b8249-8ced-41e0-979d-316e515d5fad",
+				"id": "38502017-3516-4cb9-ad9d-b195982aa8f9",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -254,30 +248,13 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "461e1c93-7eb9-4e47-a4ff-46d7ad2a309b",
+				"id": "03fa286a-0a11-43cc-b70f-5f0ece403745",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "BASE_URL",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "login",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "password",
-			"value": "",
-			"type": "string"
 		}
 	]
 }
