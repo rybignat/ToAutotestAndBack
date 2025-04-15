@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "3752f57b-7ebe-4499-861b-e0966e39d04e",
+		"name": "Sandbox collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"id": "9cd8dc55-c49f-4784-b2da-41e2f68a8d70",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/get?foo1=bar1&foo2=bar2",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"id": "e665c642-9798-4753-b54b-43a54f7273fa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo1\": \"bar1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/post"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT(?)",
+			"id": "b31c5ff3-e0a8-4fe1-b07d-d99532d8c12a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo1\": \"bar2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/put"
+			},
+			"response": []
+		},
+		{
+			"name": "HEADERS",
+			"id": "a5fa8dd2-2f7c-4c0e-a01f-db9ea0805485",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/response-headers?fu1=foo1&fu2=foo2",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"response-headers"
+					],
+					"query": [
+						{
+							"key": "fu1",
+							"value": "foo1"
+						},
+						{
+							"key": "fu2",
+							"value": "foo2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Basic Auth",
+			"id": "ab35ea52-7e23-44af-91aa-e032b05cbbb0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cG9zdG1hbjpwYXNzd29yZA==",
+						"type": "text"
+					}
+				],
+				"url": "{{baseURL}}/basic-auth"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Cookies",
+			"id": "b4dd45b2-b095-4e41-bd88-f1082797f8f1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cookies/set?foo1=bar1&foo2=bar2",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cookies",
+						"set"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cookies",
+			"id": "c6913e76-0730-4732-8ca0-507aef462d73",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseURL}}/cookies"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Cookies",
+			"id": "8858b29a-ac5f-42c9-8908-ef4ece02a429",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cookies/delete?foo1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cookies",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timestamp validity",
+			"id": "2e3aed65-243c-4b82-8dc1-6f60c9da3fa4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/time/valid?timestamp=2025-04-15",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"time",
+						"valid"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "2025-04-15"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d6942a53-f403-47ac-a8f2-cf350c9b7bea",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c13321ef-44c0-4c2d-9166-3956e4bd4f08",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
