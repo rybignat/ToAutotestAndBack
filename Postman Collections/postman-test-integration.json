@@ -15,9 +15,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/get?foo1=bar1&foo2=bar2",
+					"raw": "{{BASE_URL}}/get?foo1=bar1&foo2=bar2",
 					"host": [
-						"{{baseURL}}"
+						"{{BASE_URL}}"
 					],
 					"path": [
 						"get"
@@ -54,7 +54,7 @@
 						}
 					}
 				},
-				"url": "{{baseURL}}/post"
+				"url": "{{BASE_URL}}/post"
 			},
 			"response": []
 		},
@@ -76,7 +76,7 @@
 						}
 					}
 				},
-				"url": "{{baseURL}}/put"
+				"url": "{{BASE_URL}}/put"
 			},
 			"response": []
 		},
@@ -90,9 +90,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/response-headers?fu1=foo1&fu2=foo2",
+					"raw": "{{BASE_URL}}/response-headers?fu1=foo1&fu2=foo2",
 					"host": [
-						"{{baseURL}}"
+						"{{BASE_URL}}"
 					],
 					"path": [
 						"response-headers"
@@ -126,7 +126,7 @@
 						"type": "text"
 					}
 				],
-				"url": "{{baseURL}}/basic-auth"
+				"url": "{{BASE_URL}}/basic-auth"
 			},
 			"response": []
 		},
@@ -140,9 +140,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/cookies/set?foo1=bar1&foo2=bar2",
+					"raw": "{{BASE_URL}}/cookies/set?foo1=bar1&foo2=bar2",
 					"host": [
-						"{{baseURL}}"
+						"{{BASE_URL}}"
 					],
 					"path": [
 						"cookies",
@@ -171,7 +171,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseURL}}/cookies"
+				"url": "{{BASE_URL}}/cookies"
 			},
 			"response": []
 		},
@@ -185,9 +185,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/cookies/delete?foo1",
+					"raw": "{{BASE_URL}}/cookies/delete?foo1",
 					"host": [
-						"{{baseURL}}"
+						"{{BASE_URL}}"
 					],
 					"path": [
 						"cookies",
@@ -213,9 +213,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/time/valid?timestamp=2025-04-15",
+					"raw": "{{BASE_URL}}/time/valid?timestamp=2025-04-15",
 					"host": [
-						"{{baseURL}}"
+						"{{BASE_URL}}"
 					],
 					"path": [
 						"time",
@@ -243,7 +243,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "09171def-eacb-4491-b158-85d9f91dff19",
+				"id": "a98b8249-8ced-41e0-979d-316e515d5fad",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -254,7 +254,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "1a2874ad-2bfd-497c-81e4-f57dbeb74ed6",
+				"id": "461e1c93-7eb9-4e47-a4ff-46d7ad2a309b",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -265,7 +265,7 @@
 	],
 	"variable": [
 		{
-			"key": "baseURL",
+			"key": "BASE_URL",
 			"value": "",
 			"type": "string"
 		},
