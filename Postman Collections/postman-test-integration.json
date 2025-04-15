@@ -232,11 +232,18 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "basic",
+		"basic": {
+			"password": "{{password}}",
+			"username": "{{login}}"
+		}
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d6942a53-f403-47ac-a8f2-cf350c9b7bea",
+				"id": "09171def-eacb-4491-b158-85d9f91dff19",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -247,7 +254,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "c13321ef-44c0-4c2d-9166-3956e4bd4f08",
+				"id": "1a2874ad-2bfd-497c-81e4-f57dbeb74ed6",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -259,6 +266,16 @@
 	"variable": [
 		{
 			"key": "baseURL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "login",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
 			"value": "",
 			"type": "string"
 		}
